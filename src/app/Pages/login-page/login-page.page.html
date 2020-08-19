@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-img src='assets/Images/LoginBanner.jpg'></ion-img>
+</ion-header>
+
+<ion-content>
+  <div class="bodyContent">
+
+    <ion-tab-bar slot="">
+      <ion-tab-button tab="login" (click) = "navigate">
+        <ion-icon name="log-in" color="dark"></ion-icon>
+        <ion-label color="dark">LOGIN</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="guest" [routerLink]="['/home']">
+        <ion-icon name="person" color="dark"></ion-icon>
+        <ion-label color="dark">GUEST</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="signup">
+        <ion-icon name="person-circle" color="dark"></ion-icon>
+        <ion-label color="dark">SIGNUP</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+    <!-- <app-login></app-login> -->
+    <!-- <app-register></app-register> -->
+  </div>
+</ion-content>
