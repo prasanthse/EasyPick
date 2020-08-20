@@ -6,18 +6,35 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+//Modules
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { LoadingPageRoutingModule } from './Pages/loading/loading-routing.module';
+import { LoginPagePageModule } from './Pages/login-page/login-page.module';
+import { HomePagePageModule } from './Pages/home-page/home-page.module';
+
+//Pages
 import { LoadingPage } from './Pages/loading/loading.page';
+import { LoginPagePage } from './Pages/login-page/login-page.page';
+import { HomePagePage } from './Pages/home-page/home-page.page';
+
+//Components
+import { AppComponent } from './app.component';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
 
 import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    //Pages
     LoadingPage,
+    LoginPagePage,
+    HomePagePage,
+
+    //Components
+    AppComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   entryComponents: [],
   imports: [
@@ -25,6 +42,8 @@ import { from } from 'rxjs';
     IonicModule.forRoot(), 
     AppRoutingModule,
     LoadingPageRoutingModule,
+    LoginPagePageModule,
+    HomePagePageModule
   ],
   providers: [
     StatusBar,

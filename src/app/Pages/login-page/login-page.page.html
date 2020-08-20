@@ -1,28 +1,47 @@
 <ion-header>
-  <ion-img src='assets/Images/LoginBanner.jpg'></ion-img>
-</ion-header>
+  <div class="header">
+    <h1>Orient Lanka</h1>
+    <ion-img class="logo" src='assets/Images/CompanyLogo.png'></ion-img>
+  </div>
 
-<ion-content>
   <div class="bodyContent">
-
     <ion-tab-bar slot="">
-      <ion-tab-button tab="login" (click) = "navigate">
+      <ion-tab-button tab="login" (click) = "CheckUserLoginFormStatus(true)">
         <ion-icon name="log-in" color="dark"></ion-icon>
         <ion-label color="dark">LOGIN</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="guest" [routerLink]="['/home']">
+      <ion-tab-button tab="guest" expand="block" routerLink="/home" routerDirection="forward">
         <ion-icon name="person" color="dark"></ion-icon>
         <ion-label color="dark">GUEST</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button tab="signup">
+      <ion-tab-button tab="signup" (click) = "CheckUserLoginFormStatus(false)">
         <ion-icon name="person-circle" color="dark"></ion-icon>
         <ion-label color="dark">SIGNUP</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
-
-    <!-- <app-login></app-login> -->
-    <!-- <app-register></app-register> -->
   </div>
+
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf=" isInLoginForm; else elseCondition">
+    <app-login></app-login>
+  </div>      
+  <ng-template #elseCondition>
+    <app-register></app-register>
+  </ng-template>  
+
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <ion-text color="warning" class="footer">
+        <h6>v 1.0</h6>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

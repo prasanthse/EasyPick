@@ -21,6 +21,23 @@
     <ion-input type="password"></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label position="floating" class="formLabel">Category</ion-label>
+    <ion-icon name="trail-sign"></ion-icon>
+  </ion-item>
+
+  <ion-radio-group value="category">
+    <ion-item>
+      <ion-label>Customer</ion-label>
+      <ion-radio slot="start" value="customer" color="warning"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Shop</ion-label>
+      <ion-radio slot="start" value="shop" color="warning"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
   <ion-button expand="block" color="warning" style="margin-top: 15px;">
     <ion-text color="light">SIGNUP</ion-text>
   </ion-button>

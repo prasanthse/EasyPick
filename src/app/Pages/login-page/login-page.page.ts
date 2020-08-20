@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-login-page',
@@ -8,12 +9,31 @@ import { Router } from '@angular/router';
 })
 export class LoginPagePage implements OnInit {
 
-  constructor(private router: Router) { }
+  isInLoginForm = true;
+
+  constructor(public toastController: ToastController) { }
 
   ngOnInit() {
   }
 
-  navigate(){
-    this.router.navigate(['/home'])
+  CheckUserLoginFormStatus(status){
+    this.isInLoginForm = status;
+  }
+
+  async PresentToast(messsage) {
+    const toast = await this.toastController.create({
+      message: messsage,
+      color: "warning",
+      duration: 2000,
+    });
+    toast.present();
+  }
+
+  Login(){
+    this.PresentToast("Login Success!");
+  }
+
+  SignUp(){
+    this.PresentToast("Registered Successfully!");
   }
 }
