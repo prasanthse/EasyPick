@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePagePage
-  }
+  },
 ];
 @NgModule({
   imports: [

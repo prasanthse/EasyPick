@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { GlobalService } from '../../global.service';
 
 @Component({
   selector: 'app-loading',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoadingPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private global: GlobalService) { }
 
   ngOnInit() {
     this.SwitchToNextTask();
@@ -16,7 +17,7 @@ export class LoadingPage implements OnInit {
 
   SwitchToNextTask(){
     setTimeout(() => {
-      this.router.navigate(['/login']);
+      this.global.NavigateWithoutParam('/login');
     }, 3500);
   }
 }

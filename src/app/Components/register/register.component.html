@@ -26,7 +26,7 @@
     <ion-icon name="trail-sign"></ion-icon>
   </ion-item>
 
-  <ion-radio-group value="category">
+  <ion-radio-group value="{{category}}">
     <ion-item>
       <ion-label>Customer</ion-label>
       <ion-radio slot="start" value="customer" color="warning"></ion-radio>
@@ -39,6 +39,6 @@
   </ion-radio-group>
 
   <ion-button expand="block" color="warning" style="margin-top: 15px;">
-    <ion-text color="light">SIGNUP</ion-text>
+    <ion-text color="light" (click) = "SignUp()">SIGNUP</ion-text>
   </ion-button>
 </div>

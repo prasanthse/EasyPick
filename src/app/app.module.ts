@@ -22,6 +22,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 
+//Services
+import { GlobalService } from './global.service';
+
 import { from } from 'rxjs';
 
 @NgModule({
@@ -48,6 +51,7 @@ import { from } from 'rxjs';
   providers: [
     StatusBar,
     SplashScreen,
+    GlobalService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
