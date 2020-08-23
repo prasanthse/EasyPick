@@ -21,6 +21,7 @@ import { HomePagePage } from './Pages/home-page/home-page.page';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { SideMenuComponent } from './Components/side-menu/side-menu.component';
 
 //Services
 import { GlobalService } from './global.service';
@@ -37,7 +38,8 @@ import { from } from 'rxjs';
     //Components
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SideMenuComponent
   ],
   entryComponents: [],
   imports: [

@@ -1,9 +1,56 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>HomePage</ion-title>
-  </ion-toolbar>
+<ion-header class="header">
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-tab-button tab="side_menu" (click) = "HandleSideMenu()">
+            <ion-icon name="menu" class="headerIcons"></ion-icon>
+          </ion-tab-button>
+        </ion-col>
+        <ion-col>
+          <h4>HOME</h4>
+        </ion-col>
+        <ion-col size="3">
+          <ion-tab-button tab="cart">
+            <ion-icon name="cart" class="headerIcons"></ion-icon>
+            <ion-badge>6</ion-badge>
+          </ion-tab-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-header>
 
 <ion-content>
 
+  <!--SIDE MENU-->
+  <ion-menu side="start" menuId="first" contentId="main" (ionDidClose)="SideMenuResetProperty()" (ionDidOpen)="SideMenuActiveProperty()">
+    <app-side-menu></app-side-menu>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <!--SALES SLIDES-->
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor = "let sale of salesBannerArray">
+      <ion-img [src]="sale.image"></ion-img>
+    </ion-slide>
+  </ion-slides>
+
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <ion-text color="warning" class="footer">
+        <h6>v 1.0</h6>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+
+<script>
+  async function openMenu() {
+    await menuController.open();
+  }
+</script>

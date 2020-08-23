@@ -26,6 +26,13 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 //CSS
+.header{
+    text-align: center;
+    background-color: #ffcc00;
+    font-family: 'assets/Fonts/Precious.ttf';
+    font-weight: bold;
+}
+
 .footer{
     text-align: center;
 }
@@ -36,4 +43,10 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.headerIcons{
+    padding-top: 15px;
+    width: 25px;
+    height: 25px;
 }
