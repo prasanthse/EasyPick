@@ -1,5 +1,25 @@
 .userName{
-    font-size: medium;
+    font-size: small;
     padding-left: 0px;
     padding-right: 0px;
+    text-align: center;
+    font-family: 'assets/Fonts/Precious.ttf';
+    text-transform: uppercase;
+}
+
+.content{
+    width: 100%;
+}
+
+.icons{
+    width: 20px;
+    height: 20px;
+}
+
+.menuItemParent{
+    padding: 5px 0px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: 'assets/Fonts/Precious.ttf';
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { GlobalService } from '../../global.service';
 
 export interface SalesBanner{
   id:string;
@@ -23,10 +24,11 @@ export class HomePagePage implements OnInit {
 
   private isSideMenuOpen: any;
 
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController, private global: GlobalService) { }
 
   ngOnInit() {
     this.isSideMenuOpen = false;
+    this.global.homePageTitle = "HOME";
   }
 
   slideOpts = {

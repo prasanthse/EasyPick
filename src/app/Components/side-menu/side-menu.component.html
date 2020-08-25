@@ -4,12 +4,68 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>Menu Item</ion-item>
-    <ion-item>Menu Item</ion-item>
-    <ion-item>Menu Item</ion-item>
-    <ion-item>Menu Item</ion-item>
-    <ion-item>Menu Item</ion-item>
-  </ion-list>
-</ion-content>
+<ion-item color = "light" (click) = "SelectMenu('HOME')">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>HOME</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="home" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" *ngIf="isShop" (click) = "SelectMenu('DASHBOARD')">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>DASHBOARD</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="construct" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" (click) = "SelectMenu('CATEGORIES')">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>CATEGORIES</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="grid" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" (click) = "SelectMenu('OFFERS')">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>OFFERS</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="magnet" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" (click) = "SelectMenu('PURCHASE')">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>PURCHASE</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="pricetags" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" (click) = "CreateAlert()">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>LOGOUT</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="log-out" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
