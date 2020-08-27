@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
 export class GlobalService {
 
   public homePageTitle: string;
+  public selectedHomeComponent: number;
 
   constructor(private toastController: ToastController, private router: Router, private alertController: AlertController) { }
 

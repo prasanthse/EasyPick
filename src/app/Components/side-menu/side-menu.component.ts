@@ -18,8 +18,9 @@ export class SideMenuComponent implements OnInit {
     this.isShop = true;
   }
 
-  SelectMenu(title){
+  SelectMenu(title, index){
     this.global.homePageTitle = title;
+    this.global.selectedHomeComponent = index;
   }
 
   CreateAlert(){

@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-item color = "light" (click) = "SelectMenu('HOME')">
+<ion-item color = "light" (click) = "SelectMenu('HOME', 0)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>HOME</ion-text>
@@ -15,7 +15,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" *ngIf="isShop" (click) = "SelectMenu('DASHBOARD')">
+<ion-item color = "light" *ngIf="isShop" (click) = "SelectMenu('DASHBOARD', 1)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>DASHBOARD</ion-text>
@@ -26,7 +26,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" (click) = "SelectMenu('CATEGORIES')">
+<ion-item color = "light" (click) = "SelectMenu('CATEGORIES', 2)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>CATEGORIES</ion-text>
@@ -37,7 +37,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" (click) = "SelectMenu('OFFERS')">
+<ion-item color = "light" (click) = "SelectMenu('OFFERS', 3)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>OFFERS</ion-text>
@@ -48,7 +48,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" (click) = "SelectMenu('PURCHASE')">
+<ion-item color = "light" (click) = "SelectMenu('PURCHASE', 4)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>PURCHASE</ion-text>

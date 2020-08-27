@@ -12,7 +12,7 @@
         </ion-col>
         <ion-col size="3">
           <ion-tab-button tab="cart">
-            <ion-icon name="cart" class="headerIcons"></ion-icon>
+            <ion-icon name="cart" class="headerIcons" (click) = "OpenCart()"></ion-icon>
             <ion-badge>6</ion-badge>
           </ion-tab-button>
         </ion-col>
@@ -30,12 +30,28 @@
 
   <ion-router-outlet id="main"></ion-router-outlet>
 
-  <!--SALES SLIDES-->
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngFor = "let sale of salesBannerArray">
-      <ion-img [src]="sale.image"></ion-img>
-    </ion-slide>
-  </ion-slides>
+  <container-element [ngSwitch]="this.global.selectedHomeComponent">
+    <!--HOME INDEX-->
+    <some-element *ngSwitchCase="0">
+      <app-home-index></app-home-index>
+    </some-element>
+    <!--DASHBOARD-->
+    <some-element *ngSwitchCase="1">
+      <app-dashboard></app-dashboard>
+    </some-element>
+    <!--CATEGORIES-->
+    <some-other-element *ngSwitchCase="2">
+      <app-categories></app-categories>
+    </some-other-element>
+    <!--OFFERS-->
+    <some-other-element *ngSwitchCase="3">
+      <app-offers></app-offers>
+    </some-other-element>
+    <!--PURCHASE-->
+    <some-other-element *ngSwitchCase="4">
+      <app-purchases></app-purchases>
+    </some-other-element>
+  </container-element>
 
 </ion-content>
 

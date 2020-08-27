@@ -22,6 +22,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { SideMenuComponent } from './Components/side-menu/side-menu.component';
+import { HomeIndexComponent } from './Components/home-index/home-index.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { CategoriesComponent } from './Components/categories/categories.component';
+import { OffersComponent } from './Components/offers/offers.component';
+import { PurchasesComponent } from './Components/purchases/purchases.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 //Services
 import { GlobalService } from './global.service';
@@ -39,7 +45,13 @@ import { from } from 'rxjs';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    HomeIndexComponent,
+    DashboardComponent,
+    CategoriesComponent,
+    OffersComponent,
+    PurchasesComponent,
+    CartComponent
   ],
   entryComponents: [],
   imports: [

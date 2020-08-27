@@ -1,0 +1,8 @@
+<!--SALES SLIDES-->
+<ion-slides pager="true" [options]="slideOpts">
+  <ion-slide *ngFor = "let sale of salesBannerArray">
+    <ion-img [src]="sale.image" class="salesBanner"></ion-img>
+  </ion-slide>
+</ion-slides>
+
+
