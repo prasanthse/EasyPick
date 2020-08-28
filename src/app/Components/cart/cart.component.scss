@@ -33,3 +33,23 @@ h4{
     margin-top: 15px;
     width: 100px;
 }
+
+.item{
+    background-color: #ffcc00;
+}
+
+.btn{
+    display: block;
+    --border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.txt{
+    text-align: center;
+    font-weight: bold;
+}
+
+ion-col p{
+    padding-top: 17px;
+}

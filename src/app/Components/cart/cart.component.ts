@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { GlobalService } from '../../global.service';
 
 export interface CartItem{
   id:string;
@@ -19,13 +20,16 @@ export class CartComponent implements OnInit {
 
   @Input() userId: string;
   
-  cartItemArray: CartItem[];
+  private cartItemArray: CartItem[];
   private isLoading: boolean;
+  private totalCartPrize: number;
+  private selectedItemIndex: number;
   
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.isLoading = true;
+    this.totalCartPrize = 0;
 
     //API CALL AND LOAD DATA HERE
     this.cartItemArray = [
@@ -46,7 +50,32 @@ export class CartComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  CalculateTotalPricePerItem(){
+  CalculateTotalPricePerItem(unitPrice, quantity){
+    let productTotal = quantity * unitPrice;
+    return productTotal;
+  }
 
+  ChangeProductQuantity(index, factor){
+    if(this.cartItemArray[index].quantity < 2 && factor < 0){
+      return;
+    }
+    else{
+      this.cartItemArray[index].quantity += factor;
+      this.CalculateTotalPricePerItem(this.cartItemArray[index].unitPrice, this.cartItemArray[index].quantity);
+    }
+  }
+
+  RemoveProduct(index){
+    this.selectedItemIndex = index;
+    this.globalService.CreateAlert("DELETE", "Are you sure you want to delete " + this.cartItemArray[index].name, "Confirm", "Cancel", this.CancelDelete, this.ConfirmDelete);
+  }
+
+  CancelDelete(){
+    console.log("Delete Canceled!");
+  }
+
+  ConfirmDelete(){
+    let itemId: number = +this.selectedItemIndex;
+    this.cartItemArray.splice(itemId, 1);
   }
 }
