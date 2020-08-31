@@ -10,6 +10,8 @@ export class GlobalService {
 
   public homePageTitle: string;
   public selectedHomeComponent: number;
+  public cartCount: number;
+  public appVersion: string;
 
   constructor(private toastController: ToastController, private router: Router, private alertController: AlertController) { }
 

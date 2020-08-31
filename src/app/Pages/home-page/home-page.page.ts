@@ -11,6 +11,7 @@ import { CartComponent } from '../../Components/cart/cart.component';
 })
 export class HomePagePage implements OnInit {
   private isSideMenuOpen: any;
+  private cartCount: number;
 
   constructor(private menu: MenuController, private global: GlobalService, private modalController: ModalController) { }
 
@@ -19,6 +20,9 @@ export class HomePagePage implements OnInit {
     
     this.global.homePageTitle = "HOME";
     this.global.selectedHomeComponent = 0;
+
+    //API CALL FOR CART COUNT
+    this.global.cartCount = 5;
   }
 
   HandleSideMenu() {

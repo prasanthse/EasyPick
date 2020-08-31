@@ -36,8 +36,8 @@ export class CartComponent implements OnInit {
       {id: "0", name: "Item 01", image: "assets/Images/Cart/C1.jpg", quantity: 1, size: "medium", unitPrice: 100},
       {id: "1", name: "Item 02", image: "assets/Images/Cart/C2.jpg", quantity: 2, size: "medium", unitPrice: 80},
       {id: "2", name: "Item 03", image: "assets/Images/Cart/C3.jpg", quantity: 1, size: "medium", unitPrice: 36},
-      {id: "3", name: "Item 04", image: "assets/Images/Cart/C4.png", quantity: 3, size: "medium", unitPrice: 94},
-      {id: "4", name: "Item 05", image: "assets/Images/Cart/C5.png", quantity: 1, size: "medium", unitPrice: 123}
+      {id: "3", name: "Item 04", image: "assets/Images/Cart/C4.jpg", quantity: 3, size: "medium", unitPrice: 94},
+      {id: "4", name: "Item 05", image: "assets/Images/Cart/C5.jpg", quantity: 1, size: "medium", unitPrice: 123}
     ];
 
     //AFTER API CALL FINISHED

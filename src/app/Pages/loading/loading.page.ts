@@ -12,6 +12,7 @@ export class LoadingPage implements OnInit {
   constructor(private global: GlobalService) { }
 
   ngOnInit() {
+    this.global.appVersion = "v 1.0";
     this.SwitchToNextTask();
   }
 

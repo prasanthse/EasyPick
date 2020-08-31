@@ -13,7 +13,7 @@
         <ion-col size="3">
           <ion-tab-button tab="cart">
             <ion-icon name="cart" class="headerIcons" (click) = "OpenCart()"></ion-icon>
-            <ion-badge>6</ion-badge>
+            <ion-badge>{{this.global.cartCount}}</ion-badge>
           </ion-tab-button>
         </ion-col>
       </ion-row>
@@ -22,9 +22,8 @@
 </ion-header>
 
 <ion-content>
-
   <!--SIDE MENU-->
-  <ion-menu side="start" menuId="first" contentId="main" (ionDidClose)="SideMenuResetProperty()" (ionDidOpen)="SideMenuActiveProperty()">
+  <ion-menu class="sideMenu" side="start" menuId="first" contentId="main" (ionDidClose)="SideMenuResetProperty()" (ionDidOpen)="SideMenuActiveProperty()">
     <app-side-menu></app-side-menu>
   </ion-menu>
 
@@ -59,7 +58,7 @@
   <ion-toolbar>
     <ion-title>
       <ion-text color="warning" class="footer">
-        <h6>v 1.0</h6>
+        <h6>{{this.global.appVersion}}</h6>
       </ion-text>
     </ion-title>
   </ion-toolbar>

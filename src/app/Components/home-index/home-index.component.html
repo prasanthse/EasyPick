@@ -1,8 +1,42 @@
 <!--SALES SLIDES-->
-<ion-slides pager="true" [options]="slideOpts">
+<ion-slides pager="true" [options]="slideSalesBanner">
   <ion-slide *ngFor = "let sale of salesBannerArray">
     <ion-img [src]="sale.image" class="salesBanner"></ion-img>
   </ion-slide>
 </ion-slides>
 
+<h5>Categories</h5>
 
+<ion-slides pager="true" [options]="slideCategory">
+  <ion-slide *ngFor = "let category of categories">
+    <ion-grid>
+      <ion-row>
+        <ion-img [src]="category.image"></ion-img>
+      </ion-row>
+      <ion-row>
+        <ion-label color="warning" class="categoryName">{{category.name}}</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ion-slide>
+</ion-slides>
+
+<h5>Recommented</h5>
+
+<ion-card *ngFor = "let recommendation of recommendationArray">
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-img [src]="recommendation.image"></ion-img>
+      </ion-row>
+      <ion-row>
+        <ion-text color="warning">
+          <h6>{{recommendation.name}}</h6>
+        </ion-text>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-card>
+
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
