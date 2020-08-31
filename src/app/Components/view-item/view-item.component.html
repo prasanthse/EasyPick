@@ -1,0 +1,90 @@
+<ion-header class="top">
+  <ion-grid class="grid">
+    <ion-row>
+      <ion-col>
+        <ion-text color="dark">
+          <h4>Item Detail</h4>
+        </ion-text>
+      </ion-col>
+      <ion-col (click) = "DismissModel()" size = "2">
+        <ion-icon name="close" class="headerIcons" color="dark"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-img src = {{image}}></ion-img>
+
+      <ion-card-subtitle>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="primary">
+                <ion-text color="light" (click) = "AddToCart()">Add to Cart</ion-text>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" color="success">
+                <ion-text color="light" (click) = "Purchase()">Purchase</ion-text>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-subtitle>
+
+      <ion-card-title color = "warning">{{name}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content class="bodyText">
+      <p>{{description}}</p>
+      <br>
+      
+      <ion-grid style="padding-left: 0px; padding-right: 0px;">
+        <ion-row>
+
+          <ion-col size = "2" style="padding-left: 0px; padding-right: 0px;">
+            <div *ngFor = "let itemSize of size; let i = index" [attr.data-index]="i">
+              <ion-card color = "light">
+                <ion-card-header class="checkBox">
+                  <ion-checkbox color="warning" (click) = "SelectItemSizes(i)"></ion-checkbox>
+                </ion-card-header>
+              </ion-card>
+            </div>
+          </ion-col>
+
+          <ion-col style="padding-left: 0px; padding-right: 0px;">
+            <div *ngFor = "let itemSize of size">
+              <ion-card color = "light">
+                <ion-card-header>
+                  <ion-card-title>
+                    <ion-text color="dark">
+                      <h5>{{itemSize}}</h5>
+                    </ion-text>
+                  </ion-card-title>
+                </ion-card-header>
+              </ion-card>
+            </div>
+          </ion-col>
+
+          <ion-col size = "4" style="padding-left: 0px; padding-right: 0px;">
+            <div *ngFor = "let itemPrice of unitPrice">
+              <ion-card color = "light">
+                <ion-card-header>
+                  <ion-card-title>
+                    <ion-text color="dark">
+                      <h5>$ {{itemPrice}}</h5>
+                    </ion-text>
+                  </ion-card-title>
+                </ion-card-header>
+              </ion-card>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -28,6 +28,7 @@ import { CategoriesComponent } from './Components/categories/categories.componen
 import { OffersComponent } from './Components/offers/offers.component';
 import { PurchasesComponent } from './Components/purchases/purchases.component';
 import { CartComponent } from './Components/cart/cart.component';
+import { ViewItemComponent } from './Components/view-item/view-item.component';
 
 //Services
 import { GlobalService } from './global.service';
@@ -51,7 +52,8 @@ import { from } from 'rxjs';
     CategoriesComponent,
     OffersComponent,
     PurchasesComponent,
-    CartComponent
+    CartComponent,
+    ViewItemComponent,
   ],
   entryComponents: [],
   imports: [
