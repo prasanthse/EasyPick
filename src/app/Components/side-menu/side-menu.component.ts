@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GlobalService } from '../../global.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,19 +9,16 @@ import { GlobalService } from '../../global.service';
 })
 export class SideMenuComponent implements OnInit {
 
-  private userName: string;
-  private isShop: boolean;
+  @Input() menu: MenuController;
 
   constructor(private global: GlobalService) { }
 
-  ngOnInit() {
-    this.userName = "Prasanth";
-    this.isShop = true;
-  }
+  ngOnInit() {}
 
   SelectMenu(title, index){
     this.global.homePageTitle = title;
     this.global.selectedHomeComponent = index;
+    this.menu.close();
   }
 
   CreateAlert(){

@@ -24,7 +24,7 @@
 <ion-content>
   <!--SIDE MENU-->
   <ion-menu class="sideMenu" side="start" menuId="first" contentId="main" (ionDidClose)="SideMenuResetProperty()" (ionDidOpen)="SideMenuActiveProperty()">
-    <app-side-menu></app-side-menu>
+    <app-side-menu [menu] = "menu"></app-side-menu>
   </ion-menu>
 
   <ion-router-outlet id="main"></ion-router-outlet>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../global.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,12 +10,20 @@ export class LoginPagePage implements OnInit {
 
   isInLoginForm = true;
 
-  constructor() { }
+  constructor(private global: GlobalService) { }
 
   ngOnInit() {
   }
 
   CheckUserLoginFormStatus(status){
     this.isInLoginForm = status;
+  }
+
+  VisitAsGuest(){
+    this.global.userName = "Guest";
+    this.global.userId = "123";
+    this.global.isShop = false;
+
+    this.global.NavigateWithoutParam('/home');
   }
 }

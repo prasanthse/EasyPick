@@ -18,6 +18,11 @@ export class RegisterComponent implements OnInit {
   }
 
   SignUp(){
+    //API Call for login
+    this.global.userName = "Prasanth";
+    this.global.userId = "123";
+    this.global.isShop = true;
+    
     this.global.PresentToast("Register Success!", "success", 2000);
     this.global.NavigateWithoutParam('/home');
   }

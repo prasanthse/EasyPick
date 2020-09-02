@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import{ GlobalService } from '../../global.service';
+
 export interface SalesBanner{
   id:string;
   image:string;
@@ -30,7 +32,7 @@ export class HomeIndexComponent implements OnInit {
   private categories: Categories[];
   private recommendationArray: Products[];
 
-  constructor() { }
+  constructor(private global: GlobalService) { }
 
   ngOnInit() {
     //API CALL FOR SALES BANNER
@@ -222,5 +224,10 @@ export class HomeIndexComponent implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
+  }
+
+  SelectCategory(category){
+    this.global.categoryName = category;
+    this.global.selectedHomeComponent = 2;
   }
 }

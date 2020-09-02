@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title color="warning" class="userName">Hi! {{userName}}</ion-title>
+    <ion-title color="warning" class="userName">Hi! {{this.global.userName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,24 +15,13 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" *ngIf="isShop" (click) = "SelectMenu('DASHBOARD', 1)">
+<ion-item color = "light" *ngIf="this.global.isShop" (click) = "SelectMenu('DASHBOARD', 1)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>DASHBOARD</ion-text>
     </ion-col>
     <ion-col class="menuItemParent">
       <ion-icon name="construct" class="icons"></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-item>
-
-<ion-item color = "light" (click) = "SelectMenu('CATEGORIES', 2)">
-  <ion-row class="content">
-    <ion-col size = "10" class="menuItemParent">
-      <ion-text>CATEGORIES</ion-text>
-    </ion-col>
-    <ion-col class="menuItemParent">
-      <ion-icon name="grid" class="icons"></ion-icon>
     </ion-col>
   </ion-row>
 </ion-item>
@@ -55,6 +44,17 @@
     </ion-col>
     <ion-col class="menuItemParent">
       <ion-icon name="pricetags" class="icons"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+<ion-item color = "light" (click) = "CreateAlert()" *ngIf="!this.global.isShop">
+  <ion-row class="content">
+    <ion-col size = "10" class="menuItemParent">
+      <ion-text>LOGIN</ion-text>
+    </ion-col>
+    <ion-col class="menuItemParent">
+      <ion-icon name="log-in" class="icons"></ion-icon>
     </ion-col>
   </ion-row>
 </ion-item>

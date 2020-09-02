@@ -8,10 +8,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class GlobalService {
 
+  public userName: string;
+  public userId: string;
+  public isShop: boolean;
+
   public homePageTitle: string;
   public selectedHomeComponent: number;
   public cartCount: number;
   public appVersion: string;
+
+  public categoryName: string;
 
   constructor(private toastController: ToastController, private router: Router, private alertController: AlertController) { }
 
@@ -31,6 +37,10 @@ export class GlobalService {
   //NAVIGATION
   public NavigateWithoutParam(path){
     this.router.navigate([path]); 
+  }
+
+  public NavigateWithParam(path, test){
+    this.router.navigate([path, test]); 
   }
 
   //ALERT

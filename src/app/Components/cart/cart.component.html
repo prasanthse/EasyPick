@@ -25,7 +25,7 @@
   </ion-fab>
 
   <!-- SPINNER -->
-  <div *ngIf = "isLoading else apiCallFinished">
+  <div *ngIf = "isLoading else apiCallFinished"> 
     <ion-spinner name="bubbles" class="spinner"></ion-spinner>
   </div>
   <ng-template #apiCallFinished>

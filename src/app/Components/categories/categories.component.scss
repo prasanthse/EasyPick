@@ -1,0 +1,56 @@
+h4, h5, p{
+    margin: 0px;
+}
+
+p {
+    margin-top: 5px;
+}
+
+.btnColumn{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+h4{
+    text-align: center;
+    font-family: 'assets/Fonts/Precious.ttf';
+    font-weight: bold;
+    font-size: medium;
+}
+
+ion-avatar{
+    margin-top: 10px;
+}
+
+ion-header{
+    font-family: 'assets/Fonts/Precious.ttf';
+    font-weight: bold;
+    font-size: larger;
+    background-color: #D3D3D3;
+    padding: 10px 0px 10px 10px;
+}
+
+.spinner{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.noItem{
+    text-align: center;
+    margin-top: 200px;
+    font-family: 'assets/Fonts/Precious.ttf';
+}
+
+.backToHome{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    width: 100px;
+}
+
+.itemName{
+    background-color: #D3D3D3;
+}

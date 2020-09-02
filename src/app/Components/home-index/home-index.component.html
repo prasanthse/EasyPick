@@ -8,7 +8,7 @@
 <h5>Categories</h5>
 
 <ion-slides pager="true" [options]="slideCategory">
-  <ion-slide *ngFor = "let category of categories">
+  <ion-slide *ngFor = "let category of categories" (click) = "SelectCategory(category.name)">
     <ion-grid>
       <ion-row>
         <ion-img [src]="category.image"></ion-img>

@@ -1,3 +1,70 @@
-<p>
-  categories works!
-</p>
+<ion-header>
+  <ion-text color="dark">
+    {{global.categoryName}}
+  </ion-text>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- SPINNER -->
+    <div *ngIf = "isLoading else apiCallFinished"> 
+      <ion-spinner name="bubbles" class="spinner"></ion-spinner>
+    </div>
+    <ng-template #apiCallFinished>
+
+      <!-- NO ITEMS -->
+      <div *ngIf = "itemArray.length === 0 else haveItem">
+        <ion-text color="warning">
+          <h1 class="noItem">NO ITEMS IN THE LIST</h1>
+        </ion-text>
+        <ion-button expand="block" color="dark" class="backToHome">
+          <ion-text color="warning" (click) = "DismissModel()">HOME</ion-text>
+        </ion-button>
+      </div>
+
+      <!-- CART LIST -->
+      <ng-template #haveItem>
+        <ion-card *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size = "3">
+                  <ion-avatar>
+                    <img src={{item.image}}>
+                  </ion-avatar>
+                </ion-col>
+      
+                <ion-col>
+                  <ion-grid>
+                    <ion-row class="itemName">
+                      <ion-col>
+                        <ion-text color = "dark">
+                          <h4>{{item.name}}</h4>
+                        </ion-text>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                        <ion-button expand="block" color="primary" (click)="ViewItem(item.id, item.name, item.image, item.size, item.unitPrice, item.description)">
+                          <ion-text color="light">View</ion-text>
+                        </ion-button>
+                      </ion-col>
+      
+                      <ion-col>
+                        <ion-button expand="block" color="success">
+                          <ion-text color="light">Purchase</ion-text>
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ng-template>
+      
+    </ng-template>
+
+  </ion-list>
+</ion-content>
