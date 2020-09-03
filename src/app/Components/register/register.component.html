@@ -6,19 +6,19 @@
   <ion-item>
     <ion-label position="floating" class="formLabel">User Name</ion-label>
     <ion-icon name="create"></ion-icon>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" class="formLabel">Password</ion-label>
     <ion-icon name="lock-closed"></ion-icon>
-    <ion-input type="password"></ion-input>
+    <ion-input type="password" [(ngModel)]="passwordOne" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating" class="formLabel">Re-Enter Password</ion-label>
     <ion-icon name="lock-closed"></ion-icon>
-    <ion-input type="password"></ion-input>
+    <ion-input type="password" [(ngModel)]="passwordTwo" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -29,12 +29,12 @@
   <ion-radio-group value="{{category}}">
     <ion-item>
       <ion-label>Customer</ion-label>
-      <ion-radio slot="start" value="customer" color="warning"></ion-radio>
+      <ion-radio slot="start" value="customer" color="warning" (click)="SelectCategory(false)"></ion-radio>
     </ion-item>
 
     <ion-item>
       <ion-label>Shop</ion-label>
-      <ion-radio slot="start" value="shop" color="warning"></ion-radio>
+      <ion-radio slot="start" value="shop" color="warning" (click)="SelectCategory(true)"></ion-radio>
     </ion-item>
   </ion-radio-group>
 

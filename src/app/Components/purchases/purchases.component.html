@@ -1,1 +1,92 @@
-<p>Test</p>
+<ion-content>
+    <ion-grid *ngFor = "let item of global.selectedProduct; let i = index" [attr.data-index]="i">
+        <ion-row>
+            <ion-col>
+                <ion-card>
+                    <img src={{item.image}}>
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-text color = "dark">
+                    <h6><b>{{item.name}}</b></h6>
+                </ion-text>
+                <ion-text color = "dark">
+                    <h6>Quantity: {{item.quantity}}</h6>
+                </ion-text>
+                <ion-text color = "dark">
+                    <h6>Size: {{item.size}}</h6>
+                </ion-text>
+                <ion-text color = "dark">
+                    <h6>Price: {{item.unitPrice}}</h6>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-toolbar>
+    <ion-grid>
+        <ion-card>
+            <ion-row>
+                <ion-col>
+                    <ion-text color="dark">
+                        <h6>Products:</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text color="warning">
+                        <h6 class="amount">$ {{SubTotal()}}</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+        <ion-card>
+            <ion-row>
+                <ion-col>
+                    <ion-text color="dark">
+                        <h6>Tax:</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text color="warning">
+                        <h6 class="amount">$ {{CalculateTax()}}</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+        <ion-card>
+            <ion-row>
+                <ion-col>
+                    <ion-text color="dark">
+                        <h6>Shipping:</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text color="warning">
+                        <h6 class="amount">$ {{shipping}}</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+        <ion-card>
+            <ion-row>
+                <ion-col>
+                    <ion-text color="dark">
+                        <h3>Total:</h3>
+                    </ion-text>
+                </ion-col>
+                <ion-col>
+                    <ion-text color="warning">
+                        <h3 class="amount">$ {{TotalAmount()}}</h3>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-grid>
+    <ion-button expand="block" color="warning" style="margin-top: 15px;">
+        <ion-text color="light" (click) = "Purchase()">PURCHASE</ion-text>
+    </ion-button>
+</ion-toolbar>

@@ -9,21 +9,49 @@ import { GlobalService } from '../../global.service';
 })
 export class RegisterComponent implements OnInit {
 
-  category: any;
+  private userName: string;
+  private passwordOne: string;
+  private passwordTwo: string;
+  private isShop: boolean;
+  private category: any;
 
   constructor(private global: GlobalService) { }
 
   ngOnInit() {
     this.category = "customer";
+    this.isShop = false;
+  }
+
+  SelectCategory(status){
+    this.isShop = status;
   }
 
   SignUp(){
-    //API Call for login
-    this.global.userName = "Prasanth";
-    this.global.userId = "123";
-    this.global.isShop = true;
-    
-    this.global.PresentToast("Register Success!", "success", 2000);
-    this.global.NavigateWithoutParam('/home');
+    if(this.userName == undefined || this.userName.replace(/\s/g, "").length <= 0){
+      this.global.PresentToast("Fill User name field", "danger", 2000);
+    }
+    else if(this.passwordOne == undefined || this.passwordOne.replace(/\s/g, "").length <= 0 || this.passwordTwo == undefined || this.passwordTwo.replace(/\s/g, "").length <= 0){
+      this.global.PresentToast("Fill all the Password Fields", "danger", 2000);
+    }
+    else{
+      if(this.passwordOne == this.passwordTwo){
+        //API Call for login
+        this.global.userName = this.userName;
+        this.global.userId = "123";
+        this.global.isShop = this.isShop;
+        this.global.isGuest = false;
+
+        //RESET
+        this.userName = "";
+        this.passwordOne = "";
+        this.passwordTwo = "";
+        
+        this.global.PresentToast("Register Success!", "success", 2000);
+        this.global.NavigateWithoutParam('/home');
+      }
+      else{
+        this.global.PresentToast("Passwords are not matching", "danger", 2000);
+      }
+    }
   }
 }

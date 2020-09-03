@@ -1,3 +1,26 @@
-<p>
-  offers works!
-</p>
+<!-- SPINNER -->
+<div *ngIf = "isLoading else apiCallFinished"> 
+  <ion-spinner name="bubbles" class="spinner"></ion-spinner>
+</div>
+
+<ng-template #apiCallFinished>
+
+  <!-- NO ITEMS -->
+  <div *ngIf = "offerItemArray.length === 0 else haveItem">
+    <ion-text color="warning">
+      <h1 class="noItem">NO OFFERS AVAILABLE</h1>
+    </ion-text>
+  </div>
+
+  <!-- CART LIST -->
+  <ng-template #haveItem>
+    <ion-content>
+      <ion-list>
+        <ion-item *ngFor = "let offer of offerItemArray; let i = index" [attr.data-index]="i" style="margin-bottom: 5px;">
+          <img [src] = "offer.image" style="filter: brightness(50%);" (click)="SelectOffer(offer.id, offer.name, offer.image, offer.size, offer.unitPrice, offer.description)">
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+
+</ng-template>

@@ -8,6 +8,9 @@ import { GlobalService } from '../../global.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  
+  public userName: string;
+  public password: string;
 
   constructor(private global: GlobalService) { }
 
@@ -15,11 +18,20 @@ export class LoginComponent implements OnInit {
 
   Login(){
     //API Call for login
-    this.global.userName = "Prasanth";
-    this.global.userId = "123";
-    this.global.isShop = true;
+    if(this.userName == "prasanth" && this.password == "123"){
+      this.global.userName = "Prasanth";
+      this.global.userId = "123";
+      this.global.isShop = true;
+      this.global.isGuest = false;
 
-    this.global.PresentToast("Login Success!", "success", 2000);
-    this.global.NavigateWithoutParam('/home');
+      this.userName = "";
+      this.password = "";
+  
+      this.global.PresentToast("Login Success!", "success", 2000);
+      this.global.NavigateWithoutParam('/home');
+    }
+    else{
+      this.global.PresentToast("Incorrect username or password", "danger", 2000);
+    }
   }
 }

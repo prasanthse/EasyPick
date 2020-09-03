@@ -23,6 +23,7 @@ export class LoginPagePage implements OnInit {
     this.global.userName = "Guest";
     this.global.userId = "123";
     this.global.isShop = false;
+    this.global.isGuest = true;
 
     this.global.NavigateWithoutParam('/home');
   }

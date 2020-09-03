@@ -48,7 +48,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" (click) = "CreateAlert()" *ngIf="!this.global.isShop">
+<ion-item color = "light" (click) = "Login()" *ngIf="this.global.isGuest">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>LOGIN</ion-text>
@@ -59,7 +59,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" (click) = "CreateAlert()">
+<ion-item color = "light" (click) = "CreateAlert()" *ngIf="!this.global.isGuest">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>LOGOUT</ion-text>

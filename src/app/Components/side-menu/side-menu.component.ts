@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GlobalService } from '../../global.service';
 import { MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+
+import { GlobalService } from '../../global.service';
+import { LoginModalComponent } from '../../Components/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-side-menu',
@@ -11,7 +14,7 @@ export class SideMenuComponent implements OnInit {
 
   @Input() menu: MenuController;
 
-  constructor(private global: GlobalService) { }
+  constructor(private global: GlobalService, private modalController: ModalController) { }
 
   ngOnInit() {}
 
@@ -22,7 +25,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   CreateAlert(){
-    this.global.CreateAlert("Logout", "Are you sure, you want to logout?", "Yes", "No", this.AlertCancelCallBack, this.AlertConfirmCallBack);
+    this.global.CreateAlert("Logout", "Are you sure, you want to logout?", "Yes", "No", this.AlertCancelCallBack, this.AlertConfirmCallBack.bind(this));
   }
 
   AlertCancelCallBack(){
@@ -33,7 +36,20 @@ export class SideMenuComponent implements OnInit {
     console.log('Confirm Alert');
 
     setTimeout(() => {
+      this.menu.close();
       this.global.NavigateWithoutParam('/login');
     }, 500);
+  }
+
+  async Login(){
+    const modal = await this.modalController.create({
+      component: LoginModalComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'menu': this.modalController
+      }
+    });
+
+    return await modal.present();
   }
 }

@@ -3,6 +3,15 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
+export interface Product{
+  id:string;
+  name: string,
+  image:string;
+  quantity: number[];
+  size: string[];
+  unitPrice: number[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +20,7 @@ export class GlobalService {
   public userName: string;
   public userId: string;
   public isShop: boolean;
+  public isGuest: boolean;
 
   public homePageTitle: string;
   public selectedHomeComponent: number;
@@ -18,6 +28,9 @@ export class GlobalService {
   public appVersion: string;
 
   public categoryName: string;
+
+  public selectedProduct: Product[] = [];
+  public purchaseId: number;
 
   constructor(private toastController: ToastController, private router: Router, private alertController: AlertController) { }
 

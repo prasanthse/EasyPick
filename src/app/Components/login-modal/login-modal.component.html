@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-icon name="chevron-back" class="close" (click)="Close()"></ion-icon>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-header class="header">
+      <ion-text color="warning">
+        <h2>Login</h2>
+      </ion-text>
+    </ion-header>
+
+    <ion-item>
+      <ion-label position="floating" class="formLabel">User Name</ion-label>
+      <ion-icon name="create"></ion-icon>
+      <ion-input type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating" class="formLabel">Password</ion-label>
+      <ion-icon name="lock-closed"></ion-icon>
+      <ion-input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-button expand="block" color="warning" style="margin-top: 15px;">
+      <ion-text color="light" (click) = "Login()">LOGIN</ion-text>
+    </ion-button>
+  </ion-card>
+
+  <ion-text color="dark">
+    <h4>If You have not registered yet? Signup and Continue Below!</h4>
+  </ion-text>
+  
+  <ion-card style="margin-top: 20px;">
+    <ion-header class="header">
+      <ion-text color="warning">
+        <h2>SignUp</h2>
+      </ion-text>
+    </ion-header>
+
+    <ion-item>
+      <ion-label position="floating" class="formLabel">User Name</ion-label>
+      <ion-icon name="create"></ion-icon>
+      <ion-input type="text" [(ngModel)]="registerUserName" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating" class="formLabel">Password</ion-label>
+      <ion-icon name="lock-closed"></ion-icon>
+      <ion-input type="password" [(ngModel)]="registerPasswordOne" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating" class="formLabel">Re-Enter Password</ion-label>
+      <ion-icon name="lock-closed"></ion-icon>
+      <ion-input type="password" [(ngModel)]="registerPasswordTwo" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating" class="formLabel">Category</ion-label>
+      <ion-icon name="trail-sign"></ion-icon>
+    </ion-item>
+  
+    <ion-radio-group value="{{category}}">
+      <ion-item>
+        <ion-label>Customer</ion-label>
+        <ion-radio slot="start" value="customer" color="warning" (click)="SelectCategory(false)"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Shop</ion-label>
+        <ion-radio slot="start" value="shop" color="warning" (click)="SelectCategory(true)"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  
+    <ion-button expand="block" color="warning" style="margin-top: 15px;">
+      <ion-text color="light" (click) = "SignUp()">SIGNUP</ion-text>
+    </ion-button>
+  </ion-card>
+</ion-content>

@@ -24,7 +24,7 @@
 
 <ion-card *ngFor = "let recommendation of recommendationArray">
   <ion-item>
-    <ion-grid>
+    <ion-grid (click) = "ViewRecomendetItem(recommendation.id, recommendation.name, recommendation.image, recommendation.size, recommendation.unitPrice, recommendation.description)">
       <ion-row>
         <ion-img [src]="recommendation.image"></ion-img>
       </ion-row>

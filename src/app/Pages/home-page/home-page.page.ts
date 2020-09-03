@@ -25,7 +25,7 @@ export class HomePagePage implements OnInit {
     this.global.homePageTitle = "HOME";
     this.global.selectedHomeComponent = 0;
 
-    if(this.global.userName === "Guest"){
+    if(this.global.isGuest){  
       this.global.cartCount = 0;
     }
     else{

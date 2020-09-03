@@ -49,7 +49,7 @@
             <div *ngFor = "let itemSize of size; let i = index" [attr.data-index]="i">
               <ion-card color = "light">
                 <ion-card-header class="checkBox">
-                  <ion-checkbox color="warning" (click) = "SelectItemSizes(i)"></ion-checkbox>
+                  <ion-checkbox color="warning" (click) = "SelectItemSizes(i);"></ion-checkbox>
                 </ion-card-header>
               </ion-card>
             </div>

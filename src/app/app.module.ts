@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 //Modules
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 import { LoadingPageRoutingModule } from './Pages/loading/loading-routing.module';
 import { LoginPagePageModule } from './Pages/login-page/login-page.module';
 import { HomePagePageModule } from './Pages/home-page/home-page.module';
@@ -29,6 +30,8 @@ import { OffersComponent } from './Components/offers/offers.component';
 import { PurchasesComponent } from './Components/purchases/purchases.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { ViewItemComponent } from './Components/view-item/view-item.component';
+import { PopOverComponent } from './Components/pop-over/pop-over.component';
+import { LoginModalComponent } from './Components/login-modal/login-modal.component';
 
 //Services
 import { GlobalService } from './global.service';
@@ -54,6 +57,8 @@ import { from } from 'rxjs';
     PurchasesComponent,
     CartComponent,
     ViewItemComponent,
+    PopOverComponent,
+    LoginModalComponent
   ],
   entryComponents: [],
   imports: [
@@ -62,7 +67,8 @@ import { from } from 'rxjs';
     AppRoutingModule,
     LoadingPageRoutingModule,
     LoginPagePageModule,
-    HomePagePageModule
+    HomePagePageModule,
+    FormsModule
   ],
   providers: [
     StatusBar,

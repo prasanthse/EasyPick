@@ -1,21 +1,23 @@
 <ion-text color="dark" class="ion-text-center">
-  <p>Welcome to Orient Lanka Cosmetics Login Page. Enjoy your purchase with high quality products.</p>
+  <p>Welcome to Easy Pick Cosmetics Login Page. Enjoy your purchase with high quality products in high quality shops.</p>
 </ion-text>
     
 <div>
-  <ion-item>
-    <ion-label position="floating" class="formLabel">User Name</ion-label>
-    <ion-icon name="create"></ion-icon>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating" class="formLabel">Password</ion-label>
-    <ion-icon name="lock-closed"></ion-icon>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-
-  <ion-button expand="block" color="warning" style="margin-top: 15px;">
-    <ion-text color="light" (click) = "Login()">LOGIN</ion-text>
-  </ion-button>
+  <form (ngSubmit)="Login()">
+    <ion-item>
+      <ion-label position="floating" class="formLabel">User Name</ion-label>
+      <ion-icon name="create"></ion-icon>
+      <ion-input type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating" class="formLabel">Password</ion-label>
+      <ion-icon name="lock-closed"></ion-icon>
+      <ion-input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  
+    <ion-button expand="block" color="warning" style="margin-top: 15px;">
+      <ion-text color="light" (click) = "Login()">LOGIN</ion-text>
+    </ion-button>
+  </form>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 import{ GlobalService } from '../../global.service';
+import { ViewItemComponent } from '../../Components/view-item/view-item.component';
 
 export interface SalesBanner{
   id:string;
@@ -13,12 +15,13 @@ export interface Categories{
   name: string;
 }
 
-export interface Products{
+export interface Recomendations{
   id: string;
   name: string;
   image:string;
   size: string[];
   unitPrice: number[];
+  description: string;
 }
 
 @Component({
@@ -30,9 +33,9 @@ export class HomeIndexComponent implements OnInit {
 
   private salesBannerArray: SalesBanner[];
   private categories: Categories[];
-  private recommendationArray: Products[];
+  private recommendationArray: Recomendations[];
 
-  constructor(private global: GlobalService) { }
+  constructor(private global: GlobalService, private modalController: ModalController) { }
 
   ngOnInit() {
     //API CALL FOR SALES BANNER
@@ -46,16 +49,16 @@ export class HomeIndexComponent implements OnInit {
 
     //API CALL FOR RECOMMENDATIONS
     this.recommendationArray = [
-      {id: "0", name: "Item A", image: "assets/Images/Recommendations/R1.jpg", size: ["small", "medium"], unitPrice: [550, 870]},
-      {id: "1", name: "Item B", image: "assets/Images/Recommendations/R2.jpg", size: ["small", "medium"], unitPrice: [100, 190]},
-      {id: "2", name: "Item C", image: "assets/Images/Recommendations/R3.jpg", size: ["medium"], unitPrice: [300]},
-      {id: "3", name: "Item D", image: "assets/Images/Recommendations/R4.jpg", size: ["small", "medium"], unitPrice: [500, 800]},
-      {id: "4", name: "Item E", image: "assets/Images/Recommendations/R5.jpg", size: ["small", "medium", "Large"], unitPrice: [1200, 1500, 2000]},
-      {id: "5", name: "Item F", image: "assets/Images/Recommendations/R6.jpg", size: ["small"], unitPrice: [120]},
-      {id: "6", name: "Item G", image: "assets/Images/Recommendations/R7.jpg", size: ["small", "Large"], unitPrice: [330, 480]},
-      {id: "7", name: "Item H", image: "assets/Images/Recommendations/R8.jpg", size: ["small", "medium"], unitPrice: [270, 525]},
-      {id: "8", name: "Item I", image: "assets/Images/Recommendations/R9.jpg", size: ["small", "medium", "Large"], unitPrice: [475, 800, 1200]},
-      {id: "9", name: "Item J", image: "assets/Images/Recommendations/R10.jpg", size: ["medium"], unitPrice: [425]}
+      {id: "0", name: "Item A", image: "assets/Images/Recommendations/R1.jpg", size: ["small", "medium"], unitPrice: [550, 870], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "1", name: "Item B", image: "assets/Images/Recommendations/R2.jpg", size: ["small", "medium"], unitPrice: [100, 190], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "2", name: "Item C", image: "assets/Images/Recommendations/R3.jpg", size: ["medium"], unitPrice: [300], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "3", name: "Item D", image: "assets/Images/Recommendations/R4.jpg", size: ["small", "medium"], unitPrice: [500, 800], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "4", name: "Item E", image: "assets/Images/Recommendations/R5.jpg", size: ["small", "medium", "Large"], unitPrice: [1200, 1500, 2000], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "5", name: "Item F", image: "assets/Images/Recommendations/R6.jpg", size: ["small"], unitPrice: [120], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "6", name: "Item G", image: "assets/Images/Recommendations/R7.jpg", size: ["small", "Large"], unitPrice: [330, 480], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "7", name: "Item H", image: "assets/Images/Recommendations/R8.jpg", size: ["small", "medium"], unitPrice: [270, 525], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "8", name: "Item I", image: "assets/Images/Recommendations/R9.jpg", size: ["small", "medium", "Large"], unitPrice: [475, 800, 1200], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
+      {id: "9", name: "Item J", image: "assets/Images/Recommendations/R10.jpg", size: ["medium"], unitPrice: [425], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"}
     ];
 
     this.categories = [
@@ -229,5 +232,22 @@ export class HomeIndexComponent implements OnInit {
   SelectCategory(category){
     this.global.categoryName = category;
     this.global.selectedHomeComponent = 2;
+  }
+
+  async ViewRecomendetItem(id, name, image, size, unitPrice, description){
+    const modal = await this.modalController.create({
+      component: ViewItemComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id': id,
+        'name': name,
+        'image': image,
+        'size': size,
+        'unitPrice': unitPrice,
+        'description': description
+      }
+    });
+
+    return await modal.present();
   }
 }
