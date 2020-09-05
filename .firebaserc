@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "easy-pick-e8b5e": {
+      "hosting": {
+        "app": [
+          "easy-pick-e8b5e"
+        ]
+      }
+    }
+  }
+}

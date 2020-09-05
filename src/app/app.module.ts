@@ -36,6 +36,11 @@ import { LoginModalComponent } from './Components/login-modal/login-modal.compon
 //Services
 import { GlobalService } from './global.service';
 
+//Firebase Configurations
+import FirebaseConfig from './Firebase';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { from } from 'rxjs';
 
 @NgModule({
@@ -68,7 +73,11 @@ import { from } from 'rxjs';
     LoadingPageRoutingModule,
     LoginPagePageModule,
     HomePagePageModule,
-    FormsModule
+    FormsModule,
+
+    //Firebase
+    AngularFireModule.initializeApp(FirebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [
     StatusBar,
