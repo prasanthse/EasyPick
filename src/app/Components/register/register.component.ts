@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
 import { GlobalService } from '../../global.service';
+import { CRUDService } from '../../crud.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
   private isShop: boolean;
   private category: any;
 
-  constructor(private global: GlobalService, public auth: AngularFireAuth) { }
+  constructor(private global: GlobalService, public auth: AngularFireAuth, private fbService: CRUDService) { }
 
   ngOnInit() {
     this.category = "customer";
@@ -42,11 +43,18 @@ export class RegisterComponent implements OnInit {
         try{
           let emailFormat = this.userName + "@easypick.com";
           const response = await this.auth.createUserWithEmailAndPassword(emailFormat, this.passwordOne);
-          console.log(response);
 
-          //API Call for login
+          let data = {
+            user_id: response.user.uid,
+            user_name: this.userName,
+            shop: this.isShop
+          };
+
+          //STORE DATA
+          this.fbService.Add('Users', data);
+
           this.global.userName = this.userName;
-          this.global.userId = "123";
+          this.global.userId = response.user.uid;
           this.global.isShop = this.isShop;
           this.global.isGuest = false;
 
@@ -62,6 +70,8 @@ export class RegisterComponent implements OnInit {
           console.dir(err);
 
           if(err.code == "auth/weak-password") this.global.PresentToast("Password should be atleat 6 characters", "danger", 2000);
+          else if(err.code == "auth/network-request-failed") this.global.PresentToast("Network disconnected!", "danger", 2000);
+          else if(err.code == "auth/email-already-in-use") this.global.PresentToast("Already Registered!", "danger", 2000);
         }
       }
       else{

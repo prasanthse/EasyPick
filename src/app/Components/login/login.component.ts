@@ -4,6 +4,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
 import { GlobalService } from '../../global.service';
+import { CRUDService } from '../../crud.service';
+
+export interface UserInfo{
+  user_Id: string,
+  user_name: string,
+  shop: boolean
+}
 
 @Component({
   selector: 'app-login',
@@ -15,7 +22,7 @@ export class LoginComponent implements OnInit {
   public userName: string;
   public password: string;
 
-  constructor(private global: GlobalService, public auth: AngularFireAuth) { }
+  constructor(private global: GlobalService, public auth: AngularFireAuth, private fbService: CRUDService) { }
 
   ngOnInit() {}
 
@@ -24,12 +31,13 @@ export class LoginComponent implements OnInit {
       let emailFormat = this.userName + "@easypick.com";
       const response = await this.auth.signInWithEmailAndPassword(emailFormat, this.password);
 
-      console.log(response)
-
-      this.global.userName = "Prasanth";
-      this.global.userId = "123";
-      this.global.isShop = true;
+      this.global.userName = this.userName;
+      this.global.userId = response.user.uid;
       this.global.isGuest = false;
+
+      this.fbService.GetById('Users', 'user_id', response.user.uid).subscribe((res: UserInfo[]) => {
+        this.global.isShop = res[0].shop;
+      });
       
       this.userName = "";
       this.password = "";
@@ -39,12 +47,11 @@ export class LoginComponent implements OnInit {
     }
     catch(err){
       console.dir(err);
-      if(err.code == "auth/user-not-found"){
-        this.global.PresentToast("Incorrect username or password", "danger", 2000);
-      }
-      else if (err.code == "auth/wrong-password"){
-        this.global.PresentToast("Incorrect password!", "danger", 2000);
-      }
+
+      if(err.code == "auth/user-not-found") this.global.PresentToast("Incorrect username or password", "danger", 2000);
+      else if (err.code == "auth/wrong-password") this.global.PresentToast("Incorrect password!", "danger", 2000);
+      else if(err.code == "auth/network-request-failed") this.global.PresentToast("Network disconnected!", "danger", 2000);
+      else if(err.code == "auth/argument-error") this.global.PresentToast("Password must be a valid", "danger", 2000);
     }
   }
 }

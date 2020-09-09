@@ -35,11 +35,14 @@ import { LoginModalComponent } from './Components/login-modal/login-modal.compon
 
 //Services
 import { GlobalService } from './global.service';
+import { CRUDService } from './crud.service';
 
 //Firebase Configurations
 import FirebaseConfig from './Firebase';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { from } from 'rxjs';
 
@@ -77,12 +80,15 @@ import { from } from 'rxjs';
 
     //Firebase
     AngularFireModule.initializeApp(FirebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GlobalService,
+    CRUDService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
