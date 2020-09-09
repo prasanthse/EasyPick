@@ -1,3 +1,69 @@
-<p>
-  dashboard works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-segment scrollable value="heart" (ionChange)="SegmentChanged($event)" color="warning">
+      <ion-segment-button value="0">
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-label>ADD</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-icon name="remove-circle"></ion-icon>
+        <ion-label>REMOVE</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-icon name="refresh-circle"></ion-icon>
+        <ion-label>UPDATE</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3">
+        <ion-icon name="magnet"></ion-icon>
+        <ion-label>SALES</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="4">
+        <ion-icon name="receipt"></ion-icon>
+        <ion-label>RECOMMENDATION</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+
+  <!--ADD-->
+  <ion-card *ngIf="isAdd">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Item Name</ion-label>
+          <ion-input placeholder="Enter Name"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select placeholder="Category">
+            <ion-select-option value="0">Skin Care</ion-select-option>
+            <ion-select-option value="1">Personal Care</ion-select-option>
+            <ion-select-option value="2">Hair Care</ion-select-option>
+            <ion-select-option value="3">Color</ion-select-option>
+            <ion-select-option value="4">Fragrances</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea placeholder="Enter Description"></ion-textarea>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Sizes & Prices</ion-label>
+          <ion-input type="number" placeholder="Small Price"></ion-input>
+          <ion-input type="number" placeholder="Medium Price"></ion-input>
+          <ion-input type="number" placeholder="Large Price"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-button color="warning">Select Image</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

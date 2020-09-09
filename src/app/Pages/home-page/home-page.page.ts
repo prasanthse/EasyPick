@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-import { GlobalService } from '../../global.service';
 import { ModalController } from '@ionic/angular';
 
+import { GlobalService } from '../../global.service';
+import { CRUDService } from '../../crud.service';
 import { CartComponent } from '../../Components/cart/cart.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class HomePagePage implements OnInit {
     private menu: MenuController, 
     private global: GlobalService, 
     private modalController: ModalController,
+    private fbService: CRUDService
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,9 @@ export class HomePagePage implements OnInit {
     }
     else{
       //API CALL FOR CART COUNT
-      this.global.cartCount = 5;
+      this.fbService.GetById('Cart', 'userId', this.global.userId).subscribe(data => {
+        this.global.cartCount = data.length;
+      });
     }
   }
 
