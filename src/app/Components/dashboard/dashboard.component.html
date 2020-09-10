@@ -33,36 +33,40 @@
       <ion-list>
         <ion-item>
           <ion-label position="floating">Item Name</ion-label>
-          <ion-input placeholder="Enter Name"></ion-input>
+          <ion-input placeholder="Enter Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"></ion-input>
         </ion-item>
   
         <ion-item>
           <ion-label>Category</ion-label>
-          <ion-select placeholder="Category">
-            <ion-select-option value="0">Skin Care</ion-select-option>
-            <ion-select-option value="1">Personal Care</ion-select-option>
-            <ion-select-option value="2">Hair Care</ion-select-option>
-            <ion-select-option value="3">Color</ion-select-option>
-            <ion-select-option value="4">Fragrances</ion-select-option>
+          <ion-select placeholder="Category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
+            <ion-select-option value="skin">Skin Care</ion-select-option>
+            <ion-select-option value="personal">Personal Care</ion-select-option>
+            <ion-select-option value="hair">Hair Care</ion-select-option>
+            <ion-select-option value="color">Color</ion-select-option>
+            <ion-select-option value="fragrances">Fragrances</ion-select-option>
           </ion-select>
         </ion-item>
   
         <ion-item>
           <ion-label position="floating">Description</ion-label>
-          <ion-textarea placeholder="Enter Description"></ion-textarea>
+          <ion-textarea placeholder="Enter Description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></ion-textarea>
         </ion-item>
   
         <ion-item>
           <ion-label position="floating">Sizes & Prices</ion-label>
-          <ion-input type="number" placeholder="Small Price"></ion-input>
-          <ion-input type="number" placeholder="Medium Price"></ion-input>
-          <ion-input type="number" placeholder="Large Price"></ion-input>
+          <ion-input type="number" placeholder="Small Price" [(ngModel)]="size_small" [ngModelOptions]="{standalone: true}"></ion-input>
+          <ion-input type="number" placeholder="Medium Price" [(ngModel)]="size_medium" [ngModelOptions]="{standalone: true}"></ion-input>
+          <ion-input type="number" placeholder="Large Price" [(ngModel)]="size_large" [ngModelOptions]="{standalone: true}"></ion-input>
         </ion-item>
   
         <ion-item>
-          <ion-button color="warning">Select Image</ion-button>
+          <ion-button color="warning" (click)="SelectImage()">Select Image</ion-button>
         </ion-item>
       </ion-list>
+
+      <ion-button expand="block" color="warning">
+        <ion-text color="light" (click)="Add()">Add</ion-text>
+      </ion-button>
     </ion-card-content>
   </ion-card>
 

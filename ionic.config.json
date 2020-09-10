@@ -1,5 +1,7 @@
 {
   "name": "EasyPick",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
