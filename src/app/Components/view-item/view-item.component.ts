@@ -15,7 +15,7 @@ export class ViewItemComponent implements OnInit {
   @Input() name: string;
   @Input() image: string;
   @Input() size: string[];
-  @Input() unitPrice: number[];
+  @Input() unitPrice: number[]; 
   @Input() description: string;
 
   private selectedArray: boolean[] = [];

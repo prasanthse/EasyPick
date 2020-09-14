@@ -15,7 +15,7 @@
   </ion-row>
 </ion-item>
 
-<ion-item color = "light" *ngIf="!this.global.isShop" (click) = "SelectMenu('DASHBOARD', 1)">
+<ion-item color = "light" *ngIf="this.global.isShop" (click) = "SelectMenu('DASHBOARD', 1)">
   <ion-row class="content">
     <ion-col size = "10" class="menuItemParent">
       <ion-text>DASHBOARD</ion-text>

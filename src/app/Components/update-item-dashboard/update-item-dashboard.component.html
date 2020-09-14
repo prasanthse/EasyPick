@@ -1,0 +1,52 @@
+<ion-header class="top">
+  <ion-grid class="grid">
+    <ion-row>
+      <ion-col>
+        <ion-text color="dark">
+          <h4>{{name}} Update</h4>
+        </ion-text>
+      </ion-col>
+      <ion-col (click) = "DismissModel()" size = "2">
+        <ion-icon name="close" class="headerIcons" color="dark"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Item Name</ion-label>
+        <ion-input placeholder="Enter Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select placeholder="Category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
+          <ion-select-option value="skin">Skin Care</ion-select-option>
+          <ion-select-option value="personal">Personal Care</ion-select-option>
+          <ion-select-option value="hair">Hair Care</ion-select-option>
+          <ion-select-option value="color">Color</ion-select-option>
+          <ion-select-option value="fragrances">Fragrances</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea placeholder="Enter Description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></ion-textarea>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Sizes & Prices</ion-label>
+        <ion-input type="number" placeholder="Small Price" [(ngModel)]="size_small" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-input type="number" placeholder="Medium Price" [(ngModel)]="size_medium" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-input type="number" placeholder="Large Price" [(ngModel)]="size_large" [ngModelOptions]="{standalone: true}"></ion-input>
+      </ion-item>
+    </ion-list>
+  
+    <ion-button expand="block" color="warning">
+      <ion-text color="light" (click)="Update()">Update</ion-text>
+    </ion-button>
+  </ion-card>
+</ion-content>

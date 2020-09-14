@@ -25,8 +25,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
-
+<ion-content>
   <!--ADD-->
   <ion-card *ngIf="isAdd">
     <ion-card-content>
@@ -70,4 +69,123 @@
     </ion-card-content>
   </ion-card>
 
+  <!--DELETE-->
+  <ion-card *ngIf="isDelete">
+    <ion-grid>
+      <ion-row *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+        <ion-col *ngIf="i % 2 == 0">
+          <img [src]="item.image">
+          <h6>{{item.name}}</h6>
+          <ion-button expand="block" color="warning">
+            <ion-text color="light" (click)="CallDelete(item.name)">Delete</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ion-col *ngIf="i % 2 == 0 && i < itemArray.length - 1 else emptyCell">
+          <img [src]="itemArray[i+1].image">
+          <h6>{{itemArray[i+1].name}}</h6>
+          <ion-button expand="block" color="warning">
+            <ion-text color="light" (click)="CallDelete(itemArray[i+1].name)">Delete</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ng-template #emptyCell>
+          <ion-col></ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  
+  <!--UPDATE-->
+  <ion-card *ngIf="isUpdate">
+    <ion-grid>
+      <ion-row *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+        <ion-col *ngIf="i % 2 == 0">
+          <img [src]="item.image">
+          <h6>{{item.name}}</h6>
+          <ion-button expand="block" color="warning">
+            <ion-text color="light" (click)="Update(i)">Update</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ion-col *ngIf="i % 2 == 0 && i < itemArray.length - 1 else emptyCell">
+          <img [src]="itemArray[i+1].image">
+          <h6>{{itemArray[i+1].name}}</h6>
+          <ion-button expand="block" color="warning">
+            <ion-text color="light" (click)="Update(i+1)">Update</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ng-template #emptyCell>
+          <ion-col></ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!--SALE-->
+  <ion-card *ngIf="isSale">
+    <ion-grid>
+      <ion-row *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+        <ion-col *ngIf="i % 2 == 0">
+          <img [src]="item.image">
+          <h6>{{item.name}}</h6>
+          <ion-button expand="block" color="warning" *ngIf='!CheckAlreadyInSale(item.name)'>
+            <ion-text color="light" (click)="CallAddToSale(item.name)">Add Sale</ion-text>
+          </ion-button>
+          <ion-button expand="block" color="danger" *ngIf="CheckAlreadyInSale(item.name)">
+            <ion-text color="light" (click)="CallRemoveSale(item.name)">Remove Sale</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ion-col *ngIf="i % 2 == 0 && i < itemArray.length - 1 else emptyCell">
+          <img [src]="itemArray[i+1].image">
+          <h6>{{itemArray[i+1].name}}</h6>
+          <ion-button expand="block" color="warning" *ngIf="!CheckAlreadyInSale(itemArray[i+1].name)">
+            <ion-text color="light" (click)="CallAddToSale(itemArray[i+1].name)">Add Sale</ion-text>
+          </ion-button>
+          <ion-button expand="block" color="danger" *ngIf="CheckAlreadyInSale(itemArray[i+1].name)">
+            <ion-text color="light" (click)="CallRemoveSale(itemArray[i+1].name)">Remove Sale</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ng-template #emptyCell>
+          <ion-col></ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!--RECOMMENDATION-->
+  <ion-card *ngIf="isRecommendation">
+    <ion-grid>
+      <ion-row *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+        <ion-col *ngIf="i % 2 == 0">
+          <img [src]="item.image">
+          <h6>{{item.name}}</h6>
+          <ion-button expand="block" color="warning" *ngIf='!CheckAlreadyInRecommendation(item.name)'>
+            <ion-text color="light" (click)="CallAddToRecommendation(item.name)">Add Recommend</ion-text>
+          </ion-button>
+          <ion-button expand="block" color="danger" *ngIf="CheckAlreadyInRecommendation(item.name)">
+            <ion-text color="light" (click)="CallRemoveRecommendation(item.name)">Remove Recommend</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ion-col *ngIf="i % 2 == 0 && i < itemArray.length - 1 else emptyCell">
+          <img [src]="itemArray[i+1].image">
+          <h6>{{itemArray[i+1].name}}</h6>
+          <ion-button expand="block" color="warning" *ngIf="!CheckAlreadyInRecommendation(itemArray[i+1].name)">
+            <ion-text color="light" (click)="CallAddToRecommendation(itemArray[i+1].name)">Add Recommend</ion-text>
+          </ion-button>
+          <ion-button expand="block" color="danger" *ngIf="CheckAlreadyInRecommendation(itemArray[i+1].name)">
+            <ion-text color="light" (click)="CallRemoveRecommendation(itemArray[i+1].name)">Remove Recommend</ion-text>
+          </ion-button>
+        </ion-col>
+
+        <ng-template #emptyCell>
+          <ion-col></ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

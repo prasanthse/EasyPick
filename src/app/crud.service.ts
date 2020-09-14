@@ -24,16 +24,43 @@ export class CRUDService {
     return this.afs.collection(collectionName, ref => ref.where(field, '==', value)).valueChanges();
   }
 
-  DeleteAll(){
-    
+  DeleteAll(collectionName){
+    const ref = this.afs.collection(collectionName);
+
+    let docId = ref.valueChanges({idField: 'documentId'});
+
+    docId.subscribe(data => {
+      if(data != null){
+        for(let i = 0; i < data.length; i++){
+          this.afs.doc(collectionName + '/' + data[i].documentId).delete();
+        }
+      }
+    });
   }
 
-  DeleteById(){
+  DeleteById(collectionName, field, value){
+    let ref = this.afs.collection(collectionName, ref => ref.where(field, '==', value));
 
-    // const ref = this.afs.collection('Sales');
-    // let documentId = ref.valueChanges({idField: 'salesId'});
-    // documentId.subscribe(data => {console.log(data);})
-    
-    //this.afs.doc('Sales/' + documentId).delete();
+    ref.snapshotChanges().pipe(
+      map(changes => {
+        changes.map(a => {
+         const id = a.payload.doc.id; 
+         this.afs.doc(collectionName + '/' + id).delete();
+       })
+     })
+    ).subscribe();
+  }
+
+  Update(collectionName, field, value, updatableBody){
+    let obj = this.afs.collection(collectionName, ref => ref.where(field, '==', value));
+
+    obj.snapshotChanges().pipe(
+      map(changes => {
+        changes.map(a => {
+         const id = a.payload.doc.id; 
+         this.afs.collection(collectionName).doc(id).update(updatableBody);
+       })
+     })
+    ).subscribe();
   }
 }

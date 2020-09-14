@@ -8,7 +8,7 @@
             </ion-col>
             <ion-col>
                 <ion-text color = "dark">
-                    <h6><b>{{item.name}}</b></h6>
+                    <h6 class="name"><b>{{item.name}}</b></h6>
                 </ion-text>
                 <ion-text color = "dark">
                     <h6>Quantity: {{item.quantity}}</h6>
@@ -22,9 +22,7 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-</ion-content>
 
-<ion-toolbar>
     <ion-grid>
         <ion-card>
             <ion-row>
@@ -86,7 +84,8 @@
             </ion-row>
         </ion-card>
     </ion-grid>
+
     <ion-button expand="block" color="warning" style="margin-top: 15px;">
         <ion-text color="light" (click) = "Purchase()">PURCHASE</ion-text>
     </ion-button>
-</ion-toolbar>
+</ion-content>

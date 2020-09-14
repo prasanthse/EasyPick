@@ -24,20 +24,39 @@
 
       <!-- CART LIST -->
       <ng-template #haveItem>
-        <ion-grid *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
-          <ion-row (click)="ViewItem(item.id, item.name, item.image, item.size, item.unitPrice, item.description)">
-            <ion-col>
-              <ion-card>
-                <img src={{item.image}}>
-              </ion-card>
-            </ion-col>
-            <ion-col>
-              <ion-text color = "dark">
-                <h4>{{item.name}}</h4>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-card>
+          <ion-grid>
+            <ion-row *ngFor = "let item of itemArray; let i = index" [attr.data-index]="i">
+              <ion-col *ngIf="i % 2 == 0">
+                <img [src]="item.image">
+
+                <ion-text color = "dark">
+                  <h4>{{item.name}}</h4>
+                </ion-text>
+
+                <ion-button expand="block" color="warning">
+                  <ion-text color="light" (click)="ViewItem(item.id, item.name, item.image, item.size, item.unitPrice, item.description)">View</ion-text>
+                </ion-button>
+              </ion-col>
+      
+              <ion-col *ngIf="i % 2 == 0 && i < itemArray.length - 1 else emptyCell">
+                <img [src]="itemArray[i+1].image">
+
+                <ion-text color = "dark">
+                  <h4>{{itemArray[i+1].name}}</h4>
+                </ion-text>
+                
+                <ion-button expand="block" color="warning">
+                  <ion-text color="light" (click)="ViewItem(itemArray[i+1].id, itemArray[i+1].name, itemArray[i+1].image, itemArray[i+1].size, itemArray[i+1].unitPrice, itemArray[i+1].description)">View</ion-text>
+                </ion-button>
+              </ion-col>
+      
+              <ng-template #emptyCell>
+                <ion-col></ion-col>
+              </ng-template>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
       </ng-template>
       
     </ng-template>

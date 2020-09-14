@@ -32,6 +32,7 @@ import { CartComponent } from './Components/cart/cart.component';
 import { ViewItemComponent } from './Components/view-item/view-item.component';
 import { PopOverComponent } from './Components/pop-over/pop-over.component';
 import { LoginModalComponent } from './Components/login-modal/login-modal.component';
+import { UpdateItemDashboardComponent } from './Components/update-item-dashboard/update-item-dashboard.component';
 
 //Services
 import { GlobalService } from './global.service';
@@ -67,7 +68,8 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
     CartComponent,
     ViewItemComponent,
     PopOverComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    UpdateItemDashboardComponent
   ],
   entryComponents: [],
   imports: [
