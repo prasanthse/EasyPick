@@ -57,11 +57,16 @@ export class HomePagePage implements OnInit {
   }
 
   async OpenCart() {
+    if(this.global.userId == '123'){
+      this.global.PresentToast("Please Login to view your cart", "warning", 2000);
+      return;
+    }
+
     const modal = await this.modalController.create({
       component: CartComponent,
       cssClass: 'my-custom-class',
       componentProps: {
-        'userId': "ABC123"
+        'userId': this.global.userId
       }
     });
 

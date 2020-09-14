@@ -7,11 +7,11 @@ import { HomePagePage } from './Pages/home-page/home-page.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'loading',
     component: LoadingPage
   },
   {
-    path: 'login',
+    path: '',
     component: LoginPagePage
   },
   {

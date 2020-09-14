@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 export interface Product{
-  id:string;
+  userId:string;
   name: string,
   image:string;
+  size_small: number;
+  size_medium: number;
+  size_large: number;
   quantity: number[];
-  size: string[];
-  unitPrice: number[];
 }
 
 @Injectable({
@@ -31,6 +32,9 @@ export class GlobalService {
 
   public selectedProduct: Product[] = [];
   public purchaseId: number;
+
+  public shipping: number;
+  public tax: number;
 
   constructor(private toastController: ToastController, private router: Router, private alertController: AlertController) { }
 

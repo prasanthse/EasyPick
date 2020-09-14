@@ -10,14 +10,14 @@
                 <ion-text color = "dark">
                     <h6 class="name"><b>{{item.name}}</b></h6>
                 </ion-text>
-                <ion-text color = "dark">
-                    <h6>Quantity: {{item.quantity}}</h6>
+                <ion-text color = "dark" *ngIf="item.quantity[0] != 0 && item.size_small != 0">
+                    <h6>Small: {{item.size_small}} x {{item.quantity[0]}}</h6>
                 </ion-text>
-                <ion-text color = "dark">
-                    <h6>Size: {{item.size}}</h6>
+                <ion-text color = "dark" *ngIf="item.quantity[1] != 0 && item.size_medium != 0">
+                    <h6>Medium: {{item.size_medium}} x {{item.quantity[1]}}</h6>
                 </ion-text>
-                <ion-text color = "dark">
-                    <h6>Price: {{item.unitPrice}}</h6>
+                <ion-text color = "dark" *ngIf="item.quantity[2] != 0 && item.size_large != 0">
+                    <h6>Large: {{item.size_large}} x {{item.quantity[2]}}</h6>
                 </ion-text>
             </ion-col>
         </ion-row>
@@ -33,7 +33,7 @@
                 </ion-col>
                 <ion-col>
                     <ion-text color="warning">
-                        <h6 class="amount">$ {{SubTotal()}}</h6>
+                        <h6 class="amount">$ {{subTotal}}</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -48,7 +48,7 @@
                 </ion-col>
                 <ion-col>
                     <ion-text color="warning">
-                        <h6 class="amount">$ {{CalculateTax()}}</h6>
+                        <h6 class="amount">$ {{tax}}</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -63,7 +63,7 @@
                 </ion-col>
                 <ion-col>
                     <ion-text color="warning">
-                        <h6 class="amount">$ {{shipping}}</h6>
+                        <h6 class="amount">$ {{global.shipping}}</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -78,7 +78,7 @@
                 </ion-col>
                 <ion-col>
                     <ion-text color="warning">
-                        <h3 class="amount">$ {{TotalAmount()}}</h3>
+                        <h3 class="amount">$ {{total}}</h3>
                     </ion-text>
                 </ion-col>
             </ion-row>

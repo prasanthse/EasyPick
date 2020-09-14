@@ -52,6 +52,11 @@ export class LoginModalComponent implements OnInit {
       this.fbService.GetById('Users', 'user_id', response.user.uid).subscribe((res: UserInfo[]) => {
         this.global.isShop = res[0].shop;
       });
+
+      //API CALL FOR CART COUNT
+      this.fbService.GetById('Cart', 'userId', this.global.userId).subscribe(data => {
+        this.global.cartCount = data.length;
+      });
       
       this.userName = "";
       this.password = "";

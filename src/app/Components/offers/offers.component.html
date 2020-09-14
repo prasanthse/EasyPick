@@ -17,7 +17,7 @@
     <ion-content>
       <ion-list>
         <ion-item *ngFor = "let offer of offerItemArray; let i = index" [attr.data-index]="i" style="margin-bottom: 5px;">
-          <img [src] = "offer.image" style="filter: brightness(50%);" (click)="SelectOffer(offer.id, offer.name, offer.image, offer.size, offer.unitPrice, offer.description)">
+          <img src = {{offer.image}} style="filter: brightness(50%);" (click)="SelectOffer(i)">
         </ion-item>
       </ion-list>
     </ion-content>

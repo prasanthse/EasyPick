@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
           this.global.userId = response.user.uid;
           this.global.isShop = this.isShop;
           this.global.isGuest = false;
+          this.global.cartCount = 0;
 
           //RESET
           this.userName = "";

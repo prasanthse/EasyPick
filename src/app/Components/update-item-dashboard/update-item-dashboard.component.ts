@@ -30,6 +30,16 @@ export class UpdateItemDashboardComponent implements OnInit {
 
   Update(){
     if(!this.UpdateFormValidation()) return;
+
+    this.fbService.Update('Items', 'name', this.name, {
+      category: this.category,
+      description: this.description,
+      size_small: this.size_small,
+      size_medium: this.size_medium,
+      size_large: this.size_large
+    });
+
+    this.global.PresentToast('Successfully updated!', 'success', 2000);
   }
 
   UpdateFormValidation(){

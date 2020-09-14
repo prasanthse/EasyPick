@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+import { CRUDService } from '../../crud.service';
 import { ViewItemComponent } from '../../Components/view-item/view-item.component';
 
 export interface Offers{
-  id:string;
+  userId:string;
   name: string,
   image:string;
-  quantity: number;
-  size: string[];
-  unitPrice: number[];
+  size_small: number;
+  size_medium: number;
+  size_large: number;
   description: string;
+  shop: string;
+}
+
+export interface User{
+  user_name: string;
 }
 
 @Component({
@@ -23,37 +29,53 @@ export class OffersComponent implements OnInit {
   private offerItemArray: Offers[] = [];
   private isLoading: boolean;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private fbService: CRUDService) { }
 
   ngOnInit() {
     this.isLoading = true;
 
-    //API CALL AND LOAD DATA HERE
-    this.offerItemArray = [
-      {id: "0", name: "Item 01", image: "assets/Images/Sale/Sale1.jpg", quantity: 1, size: ["small", "medium"], unitPrice: [100, 250], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
-      {id: "1", name: "Item 02", image: "assets/Images/Sale/Sale2.jpg", quantity: 2, size: ["medium"], unitPrice: [80], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
-      {id: "2", name: "Item 03", image: "assets/Images/Sale/Sale3.jpg", quantity: 1, size: ["small", "medium", "Large"], unitPrice: [36, 120, 360], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
-      {id: "3", name: "Item 04", image: "assets/Images/Sale/Sale4.jpg", quantity: 3, size: ["small", "medium"], unitPrice: [94, 350], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"},
-      {id: "4", name: "Item 05", image: "assets/Images/Sale/Sale5.jpg", quantity: 1, size: ["Large"], unitPrice: [123], description: "Many colors and types of lipstick exist. Some lipsticks are also lip balms, to add both color and hydration. Although the name originally applied to the baton (stick) of material, within a tubular container, usually around 10mm in diameter and 50mm in length the term now generally relate to the material itself, regardless of method of application"}
-    ];
+    //Load Offers 
+    this.fbService.GetAll('Sales').subscribe((data: Offers[]) => {
+      for(let i = 0; i < data.length; i++){
+        this.offerItemArray = [...data]
 
+        this.fbService.GetById('Items', 'name', data[i].name).subscribe((item: Offers[]) => {
+          this.offerItemArray[i].description = item[0].description;
+          this.offerItemArray[i].image = item[0].image;
+          this.offerItemArray[i].size_large = item[0].size_large;
+          this.offerItemArray[i].size_medium = item[0].size_medium;
+          this.offerItemArray[i].size_small = item[0].size_small;
+
+          this.fbService.GetById('Users', 'user_id', this.offerItemArray[i].userId).subscribe((user: User[]) => {
+            this.offerItemArray[i].shop = user[0].user_name;
+          });
+
+          this.fbService.GetImage(this.offerItemArray[i].image).then(img => {
+            this.offerItemArray[i].image = img;
+          });
+        });
+      }
+    });
+  
     //AFTER API CALL FINISHED
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
   }
 
-  async SelectOffer(id, name, image, size, unitPrice, description){
+  async SelectOffer(i){
     const modal = await this.modalController.create({
       component: ViewItemComponent,
       cssClass: 'my-custom-class',
       componentProps: {
-        'id': id,
-        'name': name,
-        'image': image,
-        'size': size,
-        'unitPrice': unitPrice,
-        'description': description
+        'userId': this.offerItemArray[i].userId,
+        'name': this.offerItemArray[i].name,
+        'image': this.offerItemArray[i].image,
+        'size_small': this.offerItemArray[i].size_small,
+        'size_medium': this.offerItemArray[i].size_medium,
+        'size_large': this.offerItemArray[i].size_large,
+        'description': this.offerItemArray[i].description,
+        'shop': this.offerItemArray[i].shop
       }
     });
 

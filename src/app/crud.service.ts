@@ -4,13 +4,14 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CRUDService {
 
-  constructor(private readonly afs: AngularFirestore, private db: AngularFireDatabase) { }
+  constructor(private readonly afs: AngularFirestore, private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   Add(collectionName, data){
     this.afs.collection<any>(collectionName).add(data);
@@ -22,6 +23,10 @@ export class CRUDService {
 
   GetById(collectionName, field, value){
     return this.afs.collection(collectionName, ref => ref.where(field, '==', value)).valueChanges();
+  }
+
+  GetImage(url){
+    return this.storage.storage.refFromURL(url).getDownloadURL();
   }
 
   DeleteAll(collectionName){

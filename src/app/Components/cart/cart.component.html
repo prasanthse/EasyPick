@@ -11,7 +11,7 @@
       </ion-col>
       <ion-col>
         <ion-button expand="block" color="dark">
-          <ion-text color="warning">PURCHASE</ion-text>
+          <ion-text color="warning" (click) = "CallPurchase()">PURCHASE</ion-text>
         </ion-button>
       </ion-col>
     </ion-row>
@@ -19,11 +19,6 @@
 </ion-header>
 
 <ion-content>
-  <!--FAB BTN-->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-    <ion-fab-button>{{totalCartPrize}}/=</ion-fab-button>
-  </ion-fab>
-
   <!-- SPINNER -->
   <div *ngIf = "isLoading else apiCallFinished"> 
     <ion-spinner name="bubbles" class="spinner"></ion-spinner>
@@ -44,10 +39,10 @@
     <ng-template #haveItem>
 
       <ion-card *ngFor = "let cart of cartItemArray; let i = index" [attr.data-index]="i">
-        <img [src] = "cart.image">
+        <img src = "{{cart.image}}">
 
         <ion-item>
-          <ion-label><b>{{cart.name}}</b></ion-label>
+          <ion-label><b>{{cart.name}} - {{cart.shop}}</b></ion-label>
           <ion-button expand="block" color="danger" slot="end">
             <ion-text color="light" (click) = "RemoveProduct(i)">Remove</ion-text>
           </ion-button>
@@ -58,7 +53,7 @@
           <ion-grid style="padding: 0px 0px 2px 0px;">
             <ion-row>
               <ion-col size = "5" style="padding: 0px;">
-                <p>Quantity:</p>
+                <p>Small:</p>
               </ion-col>
 
               <ion-col style="padding: 0px 2px 0px 0px;">
@@ -66,15 +61,69 @@
                   <ion-row>
 
                     <ion-col style="padding: 0px;" size = "3">
-                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, -1)">-</ion-button>
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, -1, 0)">-</ion-button>
                     </ion-col>
 
                     <ion-col color = "dark" style="padding: 0px;">
-                      <ion-input type="number" value={{cart.quantity}} class="txt" readonly></ion-input>
+                      <ion-input type="number" value={{cart.size_small}} class="txt" readonly></ion-input>
                     </ion-col>
 
                     <ion-col style="padding: 0px;" size = "3">
-                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, 1)">+</ion-button>
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, 1, 0)">+</ion-button>
+                    </ion-col>
+
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+              <ion-col size = "5" style="padding: 0px;">
+                <p>Medium:</p>
+              </ion-col>
+
+              <ion-col style="padding: 0px 2px 0px 0px;">
+                <ion-grid style="padding: 0px;">
+                  <ion-row>
+
+                    <ion-col style="padding: 0px;" size = "3">
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, -1, 1)">-</ion-button>
+                    </ion-col>
+
+                    <ion-col color = "dark" style="padding: 0px;">
+                      <ion-input type="number" value={{cart.size_medium}} class="txt" readonly></ion-input>
+                    </ion-col>
+
+                    <ion-col style="padding: 0px;" size = "3">
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, 1, 1)">+</ion-button>
+                    </ion-col>
+
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+              <ion-col size = "5" style="padding: 0px;">
+                <p>Large:</p>
+              </ion-col>
+
+              <ion-col style="padding: 0px 2px 0px 0px;">
+                <ion-grid style="padding: 0px;">
+                  <ion-row>
+
+                    <ion-col style="padding: 0px;" size = "3">
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, -1, 2)">-</ion-button>
+                    </ion-col>
+
+                    <ion-col color = "dark" style="padding: 0px;">
+                      <ion-input type="number" value={{cart.size_large}} class="txt" readonly></ion-input>
+                    </ion-col>
+
+                    <ion-col style="padding: 0px;" size = "3">
+                      <ion-button class="btn" color = "warning" (click) = "ChangeProductQuantity(i, 1, 2)">+</ion-button>
                     </ion-col>
 
                   </ion-row>
@@ -84,9 +133,7 @@
             </ion-row>
           </ion-grid>
 
-          <p>Size: <b>{{cart.size}}</b></p>
-          <p>Unit Price : <b>{{cart.unitPrice}}</b></p>
-          <p>Total Price: <b>{{CalculateTotalPricePerItem(cart.unitPrice, cart.quantity)}}</b></p>
+          <p>Total Price: <b>{{CalculateTotalPricePerItem(cart.size_small, cart.size_medium, cart.size_large, cart.name)}}</b></p>
 
         </ion-card-content>
       </ion-card>

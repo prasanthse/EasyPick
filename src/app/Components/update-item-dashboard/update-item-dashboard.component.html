@@ -18,17 +18,17 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Item Name</ion-label>
-        <ion-input placeholder="Enter Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"></ion-input>
+        <ion-input placeholder="Enter Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" disabled></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-label>Category</ion-label>
         <ion-select placeholder="Category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
-          <ion-select-option value="skin">Skin Care</ion-select-option>
-          <ion-select-option value="personal">Personal Care</ion-select-option>
-          <ion-select-option value="hair">Hair Care</ion-select-option>
-          <ion-select-option value="color">Color</ion-select-option>
-          <ion-select-option value="fragrances">Fragrances</ion-select-option>
+          <ion-select-option value="Skin Care">Skin Care</ion-select-option>
+          <ion-select-option value="Personal Care">Personal Care</ion-select-option>
+          <ion-select-option value="Hair Care">Hair Care</ion-select-option>
+          <ion-select-option value="Color">Color</ion-select-option>
+          <ion-select-option value="Fragrances">Fragrances</ion-select-option>
         </ion-select>
       </ion-item>
   

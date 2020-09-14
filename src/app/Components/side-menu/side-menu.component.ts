@@ -37,7 +37,7 @@ export class SideMenuComponent implements OnInit {
 
     setTimeout(() => {
       this.menu.close();
-      this.global.NavigateWithoutParam('/login');
+      this.global.NavigateWithoutParam('');
     }, 500);
   }
 

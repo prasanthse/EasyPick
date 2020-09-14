@@ -22,16 +22,24 @@
 
 <h5>Recommented</h5>
 
-<ion-card *ngFor = "let recommendation of recommendationArray">
+<ion-card *ngFor = "let recommendation of recommendationArray; let i = index" [attr.data-index]="i">
   <ion-item>
-    <ion-grid (click) = "ViewRecomendetItem(recommendation.id, recommendation.name, recommendation.image, recommendation.size, recommendation.unitPrice, recommendation.description)">
+    <ion-grid (click) = "ViewRecomendetItem(i)">
       <ion-row>
-        <ion-img [src]="recommendation.image"></ion-img>
+        <ion-img src={{recommendation.image}}></ion-img>
       </ion-row>
       <ion-row>
-        <ion-text color="warning">
-          <h6>{{recommendation.name}}</h6>
-        </ion-text>
+        <ion-col>
+          <ion-text color="warning" style="text-align: start;">
+            <h6>{{recommendation.name}}</h6>
+          </ion-text>
+        </ion-col>
+
+        <ion-col>
+          <ion-text color="dark" style="text-align: end;">
+            <h6>{{recommendation.shop}}</h6>
+          </ion-text>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-item>

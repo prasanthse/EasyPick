@@ -46,41 +46,96 @@
         <ion-row>
 
           <ion-col size = "2" style="padding-left: 0px; padding-right: 0px;">
-            <div *ngFor = "let itemSize of size; let i = index" [attr.data-index]="i">
-              <ion-card color = "light">
-                <ion-card-header class="checkBox">
-                  <ion-checkbox color="warning" (click) = "SelectItemSizes(i);"></ion-checkbox>
-                </ion-card-header>
-              </ion-card>
-            </div>
+            <ion-card color = "light">
+              <ion-card-header class="checkBox">
+                <ion-checkbox color="warning" (click) = "SelectItemSizes(0);" disabled="{{disableStock[0]}}"></ion-checkbox>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header class="checkBox">
+                <ion-checkbox color="warning" (click) = "SelectItemSizes(1);" disabled="{{disableStock[1]}}"></ion-checkbox>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header class="checkBox">
+                <ion-checkbox color="warning" (click) = "SelectItemSizes(2);" disabled="{{disableStock[2]}}"></ion-checkbox>
+              </ion-card-header>
+            </ion-card>
           </ion-col>
 
           <ion-col style="padding-left: 0px; padding-right: 0px;">
-            <div *ngFor = "let itemSize of size">
-              <ion-card color = "light">
-                <ion-card-header>
-                  <ion-card-title>
-                    <ion-text color="dark">
-                      <h5>{{itemSize}}</h5>
-                    </ion-text>
-                  </ion-card-title>
-                </ion-card-header>
-              </ion-card>
-            </div>
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5>Small</h5>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5>Medium</h5>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5>Large</h5>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
           </ion-col>
 
           <ion-col size = "4" style="padding-left: 0px; padding-right: 0px;">
-            <div *ngFor = "let itemPrice of unitPrice">
-              <ion-card color = "light">
-                <ion-card-header>
-                  <ion-card-title>
-                    <ion-text color="dark">
-                      <h5>$ {{itemPrice}}</h5>
-                    </ion-text>
-                  </ion-card-title>
-                </ion-card-header>
-              </ion-card>
-            </div>
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5 *ngIf="size_small != 0 else notAvailable">$ {{size_small}}</h5>
+                    <ng-template #notAvailable>
+                      <h5>No Stock</h5>
+                    </ng-template>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5 *ngIf="size_medium != 0 else notAvailable">$ {{size_medium}}</h5>
+                    <ng-template #notAvailable>
+                      <h5>No Stock</h5>
+                    </ng-template>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card color = "light">
+              <ion-card-header>
+                <ion-card-title>
+                  <ion-text color="dark">
+                    <h5 *ngIf="size_large != 0 else notAvailable">$ {{size_large}}</h5>
+                    <ng-template #notAvailable>
+                      <h5>No Stock</h5>
+                    </ng-template>
+                  </ion-text>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
           </ion-col>
 
         </ion-row>

@@ -1,14 +1,30 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+
 import { GlobalService } from '../../global.service';
+import { CRUDService } from '../../crud.service';
+import { Item } from '../dashboard/dashboard.component';
 
 export interface CartItem{
-  id:string;
+  userId:string;
   name: string,
-  image:string;
-  quantity: number;
-  size: string;
-  unitPrice: number;
+  shop:string;
+  size_small: number;
+  size_medium: number;
+  size_large: number;
+  cartId: string;
+  image: string;
+}
+
+export interface Shop{
+  user_name: string;
+}
+
+export interface SelectedItem{
+  name: string;
+  size_small: number;
+  size_medium: number;
+  size_large: number;
 }
 
 @Component({
@@ -21,24 +37,32 @@ export class CartComponent implements OnInit {
   @Input() userId: string;
   
   private cartItemArray: CartItem[];
+  private itemPriceArray: SelectedItem[];
   private isLoading: boolean;
   private totalCartPrize: number;
   private selectedItemIndex: number;
   
-  constructor(private modalController: ModalController, private globalService: GlobalService) { }
+  constructor(private modalController: ModalController, private globalService: GlobalService, private fbService: CRUDService) { }
 
   ngOnInit() {
     this.isLoading = true;
     this.totalCartPrize = 0;
 
-    //API CALL AND LOAD DATA HERE
-    this.cartItemArray = [
-      {id: "0", name: "Item 01", image: "assets/Images/Cart/C1.jpg", quantity: 1, size: "medium", unitPrice: 100},
-      {id: "1", name: "Item 02", image: "assets/Images/Cart/C2.jpg", quantity: 2, size: "medium", unitPrice: 80},
-      {id: "2", name: "Item 03", image: "assets/Images/Cart/C3.jpg", quantity: 1, size: "medium", unitPrice: 36},
-      {id: "3", name: "Item 04", image: "assets/Images/Cart/C4.jpg", quantity: 3, size: "medium", unitPrice: 94},
-      {id: "4", name: "Item 05", image: "assets/Images/Cart/C5.jpg", quantity: 1, size: "medium", unitPrice: 123}
-    ];
+    //Load Cart details
+    this.fbService.GetById('Cart', 'userId', this.userId).subscribe((data: CartItem[]) => {
+      this.cartItemArray = [...data];
+
+      for(let i = 0; i < this.cartItemArray.length; i++){
+        this.fbService.GetImage(this.cartItemArray[i].image).then(img => {
+          this.cartItemArray[i].image = img;
+        });
+      }
+    });
+
+    //Load Item Prices
+    this.fbService.GetAll('Items').subscribe((item: SelectedItem[]) => {
+      this.itemPriceArray = [...item];
+    });
 
     //AFTER API CALL FINISHED
     setTimeout(() => {
@@ -50,24 +74,62 @@ export class CartComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  CalculateTotalPricePerItem(unitPrice, quantity){
-    let productTotal = quantity * unitPrice;
+  //QUANTITY
+  CalculateTotalPricePerItem(small_quantity, medium_quantity, large_quantity, itemName){
+    let index;
+    for(let i = 0; i < this.itemPriceArray.length; i++){
+      if(this.itemPriceArray[i].name == itemName){
+        index = i;
+        break;
+      }
+    }
+
+    let productTotal = this.itemPriceArray[index].size_small * small_quantity + this.itemPriceArray[index].size_medium * medium_quantity + this.itemPriceArray[index].size_large * large_quantity;
     return productTotal;
   }
 
-  ChangeProductQuantity(index, factor){
-    if(this.cartItemArray[index].quantity < 2 && factor < 0){
-      return;
+  ChangeProductQuantity(index, factor, type){
+    let quantity;
+
+    if(type == 0){
+      quantity = this.cartItemArray[index].size_small;
+
+      if(quantity < 1 && factor < 0){
+        return;
+      }
+      else{
+        quantity += factor;
+        this.cartItemArray[index].size_small = quantity;
+      }
     }
-    else{
-      this.cartItemArray[index].quantity += factor;
-      this.CalculateTotalPricePerItem(this.cartItemArray[index].unitPrice, this.cartItemArray[index].quantity);
+    else if(type == 1){
+      quantity = this.cartItemArray[index].size_medium;
+
+      if(quantity < 1 && factor < 0){
+        return;
+      }
+      else{
+        quantity += factor;
+        this.cartItemArray[index].size_medium = quantity;
+      }
+    }
+    else if(type == 2){
+      quantity = this.cartItemArray[index].size_large;
+
+      if(quantity < 1 && factor < 0){
+        return;
+      }
+      else{
+        quantity += factor;
+        this.cartItemArray[index].size_large = quantity;
+      }
     }
   }
 
+  //REMOVE
   RemoveProduct(index){
     this.selectedItemIndex = index;
-    this.globalService.CreateAlert("DELETE", "Are you sure you want to delete " + this.cartItemArray[index].name, "Confirm", "Cancel", this.CancelDelete, this.ConfirmDelete);
+    this.globalService.CreateAlert("DELETE", "Are you sure you want to delete " + this.cartItemArray[index].name, "Confirm", "Cancel", this.CancelDelete, this.ConfirmDelete.bind(this));
   }
 
   CancelDelete(){
@@ -75,7 +137,64 @@ export class CartComponent implements OnInit {
   }
 
   ConfirmDelete(){
+    this.fbService.DeleteById('Cart', 'cartId', this.cartItemArray[this.selectedItemIndex].cartId);
+
     let itemId: number = +this.selectedItemIndex;
     this.cartItemArray.splice(itemId, 1);
+
+    this.globalService.cartCount--;
+  }
+
+  //PURCHASE
+  CallPurchase(){
+    this.globalService.CreateAlert("PURCHASE", "Are you sure you want to purchase all the items?", "Yes", "No", this.CancelPurchaseCallBack, this.ConfirmPurchaseCallBack.bind(this));
+  }
+
+  CancelPurchaseCallBack(){
+    console.log("Purchase canceled!");
+  }
+
+  ConfirmPurchaseCallBack(){
+    this.globalService.purchaseId = 1;
+
+    this.SetSelectedProductProperty();
+
+    this.globalService.homePageTitle = "PURCHASE";
+    this.globalService.selectedHomeComponent = 4;
+
+    this.modalController.dismiss();
+  }
+
+  SetSelectedProductProperty(){
+    for(let i = 0; i < this.globalService.selectedProduct.length; i++){
+      this.globalService.selectedProduct.pop();
+    }
+
+    let index;
+
+    for(let i = 0; i < this.cartItemArray.length; i++){
+      for(let j = 0; j < this.itemPriceArray.length; j++){
+        if(this.itemPriceArray[j].name == this.cartItemArray[i].name){
+          index = i;
+          break;
+        }
+      }
+
+      this.globalService.selectedProduct.push(
+        {
+          userId: this.cartItemArray[i].userId, 
+          image: this.cartItemArray[i].image, 
+          name: this.cartItemArray[i].name, 
+          size_small: this.itemPriceArray[index].size_small,
+          size_medium: this.itemPriceArray[index].size_medium, 
+          size_large: this.itemPriceArray[index].size_large, 
+          quantity:[
+            this.cartItemArray[i].size_small, 
+            this.cartItemArray[i].size_medium, 
+            this.cartItemArray[i].size_large
+          ]
+        }
+      );
+    }
   }
 }

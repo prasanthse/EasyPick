@@ -55,26 +55,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.SetBodySateChange(true, false, false, false, false);
 
-    //API CALL
-    this.itemArray = [
-      {userId: "0", name: "Item 01", image: "assets/Images/Cart/C1.jpg", description: "description 1", category: "hair", size_small: 40, size_medium: 540, size_large: 1000},
-      {userId: "0", name: "Item 02", image: "assets/Images/Cart/C2.jpg", description: "description 2", category: "hair", size_small: 50, size_medium: 400, size_large: 0},
-      {userId: "0", name: "Item 03", image: "assets/Images/Cart/C3.jpg", description: "description 3", category: "color", size_small: 0, size_medium: 40, size_large: 86},
-      {userId: "0", name: "Item 04", image: "assets/Images/Cart/C4.jpg", description: "description 4", category: "fragrances", size_small: 200, size_medium: 500, size_large: 0},
-      {userId: "0", name: "Item 05", image: "assets/Images/Cart/C5.jpg", description: "description 5", category: "skin", size_small: 0, size_medium: 0, size_large: 123}
-    ];
+    //Load all items
+    this.fbService.GetById('Items', 'userId', this.global.userId).subscribe((item: Item[]) => {
+      this.itemArray = [...item];
 
-    //API CALL
-    this.saleItemArray = [
-      {userId: "0", name: "Item 01"},
-      {userId: "0", name: "Item 04"}
-    ];
+      for(let i = 0; i < this.itemArray.length; i++){
+        this.fbService.GetImage(this.itemArray[i].image).then(img => {
+          this.itemArray[i].image = img;
+        });
+      }
+    });
 
-    //API CALL
-    this.recommendedItemArray = [
-      {userId: "0", name: "Item 02"},
-      {userId: "0", name: "Item 03"}
-    ];
+    //Load all Recommendations
+    this.fbService.GetById('Recommendations', 'userId', this.global.userId).subscribe((rec: SpecialItem[]) => {
+      this.recommendedItemArray = [...rec];
+    });
+
+    //Load all Sales
+    this.fbService.GetById('Sales', 'userId', this.global.userId).subscribe((sale: SpecialItem[]) => {
+      this.saleItemArray = [...sale];
+    });
   }
 
   SegmentChanged(ev: any){
@@ -184,7 +184,8 @@ export class DashboardComponent implements OnInit {
 
   //DELETE
   ConfirmDeleteCallback(){
-    console.log(this.confirmProduct);
+    this.fbService.DeleteById('Items', 'name', this.confirmProduct);
+    this.global.PresentToast('Successfully deleted!', 'success', 2000);
   }
 
   CancelDeleteCallback(){
@@ -233,7 +234,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ConfirmSaleCallback(){
-    console.log(this.confirmProduct);
+    let item = {
+      userId: this.global.userId,
+      name: this.confirmProduct
+    }
+
+    this.fbService.Add('Sales', item);
+
+    this.global.PresentToast('Successfully added for sale!', 'success', 2000);
   }
 
   CancelSaleCallback(){
@@ -246,7 +254,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ConfirmSaleRemoveCallback(){
-    console.log(this.confirmProduct);
+    this.fbService.DeleteById('Sales', 'name', this.confirmProduct);
+    this.global.PresentToast('Successfully removed from sale!', 'success', 2000);
   }
 
   CancelSaleRemoveCallback(){
@@ -265,7 +274,7 @@ export class DashboardComponent implements OnInit {
   }
 
   CallAddToRecommendation(name){
-    if(this.recommendedItemArray.length > this.maxRecommendation){
+    if(this.recommendedItemArray.length >= this.maxRecommendation){
       this.global.PresentToast("You cannot add more than " + this.maxRecommendation + " items as recommended item", "danger", 2000);
     }
     else{
@@ -275,7 +284,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ConfirmRecommendationCallback(){
-    console.log(this.confirmProduct);
+    let item = {
+      userId: this.global.userId,
+      name: this.confirmProduct
+    }
+
+    this.fbService.Add('Recommendations', item);
+
+    this.global.PresentToast('Successfully added into Recommendations!', 'success', 2000);
   }
 
   CancelRecommendationCallback(){
@@ -288,7 +304,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ConfirmRecommendationRemoveCallback(){
-    console.log(this.confirmProduct);
+    this.fbService.DeleteById('Recommendations', 'name', this.confirmProduct);
+    this.global.PresentToast('Successfully removed from Recommendations!', 'success', 2000);
   }
 
   CancelRecommendationRemoveCallback(){
